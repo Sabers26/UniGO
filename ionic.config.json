@@ -1,0 +1,7 @@
+{
+  "name": "UniGO",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
