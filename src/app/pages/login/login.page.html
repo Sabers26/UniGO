@@ -1,0 +1,17 @@
+<app-header titulo="Inicio de sesion"></app-header>
+
+<ion-content class="ion-padding">
+  <form #Miformulario="ngForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+        <ion-input required labelPlacement="floating" type="email" aria-label="Email" label="E-mail" name="email" [(ngModel)]="usuario.email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-input required labelPlacement="floating" type="text" aria-label="Contraseña" label="Contraseña" name="password" [(ngModel)]="usuario.password"></ion-input>
+    </ion-item>
+
+    <ion-button block color="danger" type="submit" [disabled]="Miformulario.invalid">
+      Iniciar Sesion
+    </ion-button>
+</form>
+</ion-content>
