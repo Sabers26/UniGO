@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ControlSesionGuard } from './control-sesion.guard';
+import { ConexionGuardGuard } from './conexion-guard.guard';
 
-describe('ControlSesionGuard', () => {
-  let guard: ControlSesionGuard;
+describe('ConexionGuardGuard', () => {
+  let guard: ConexionGuardGuard;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    guard = TestBed.inject(ControlSesionGuard);
+    guard = TestBed.inject(ConexionGuardGuard);
   });
 
   it('should be created', () => {

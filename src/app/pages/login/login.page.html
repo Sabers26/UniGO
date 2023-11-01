@@ -1,17 +1,30 @@
 <app-header titulo="Inicio de sesion"></app-header>
 
 <ion-content class="ion-padding">
-  <form #Miformulario="ngForm" (ngSubmit)="onSubmit()">
+  <ion-img src="assets/UNIGO.png" style="width: 150px; margin: auto;"></ion-img>
+
+  <form [formGroup]="form" (ngSubmit)="iniciarSesion()">
     <ion-item>
-        <ion-input required labelPlacement="floating" type="email" aria-label="Email" label="E-mail" name="email" [(ngModel)]="usuario.email"></ion-input>
+        <ion-input required labelPlacement="floating" type="email" aria-label="Email" label="E-mail" name="email" formControlName="email"></ion-input>
     </ion-item>
 
+    <ion-text *ngIf="form.get('nombre')?.errors?.['required'] && form.get('nombre')?.touched">
+      <p style="margin-left: 5%; color: #ff0000;">Debe ingresar un Email</p>
+    </ion-text>
+
     <ion-item>
-        <ion-input required labelPlacement="floating" type="text" aria-label="Contraseña" label="Contraseña" name="password" [(ngModel)]="usuario.password"></ion-input>
+        <ion-input required labelPlacement="floating" type="text" aria-label="Contraseña" label="Contraseña" name="password" formControlName="password"></ion-input>
     </ion-item>
 
-    <ion-button block color="danger" type="submit" [disabled]="Miformulario.invalid">
+    <ion-text *ngIf="form.get('password')?.errors?.['required'] && form.get('password')?.touched">
+      <p style="margin-left: 5%; color: #ff0000;">Debe ingresar su contraseña</p>
+    </ion-text>
+
+    <ion-button block color="danger" type="submit" expand="block" shape="round" [disabled]="form.invalid">
       Iniciar Sesion
     </ion-button>
-</form>
+  </form>
+  <ion-text>
+    <h5>No tienes cuenta? <a routerLink="/register" style="color: #5260ff;">Registrate</a></h5>
+  </ion-text>
 </ion-content>

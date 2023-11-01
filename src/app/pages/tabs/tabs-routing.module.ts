@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { TabsPage } from './tabs.page';
-import { ControlSesionGuard } from 'src/app/guards/control-sesion.guard';
+import { ConexionGuardGuard } from 'src/app/guards/conexion-guard.guard';
+import { NoConexionGuardGuard } from 'src/app/guards/no-conexion-guard.guard';
 
 const routes: Routes = [
   {
@@ -12,20 +13,16 @@ const routes: Routes = [
       {
         path: 'home',
         loadChildren: () => import('../home/home.module').then( m => m.HomePageModule),
-        canActivate:[ControlSesionGuard]
+        canActivate:[NoConexionGuardGuard]
       },
       {
         path: 'perfil',
         loadChildren: () => import('../perfil/perfil.module').then( m => m.PerfilPageModule),
-        canActivate:[ControlSesionGuard]
       },
       {
-        path: 'login',
-        loadChildren: () => import('../login/login.module').then( m => m.LoginPageModule)
-      },
-      {
-        path: 'register',
-        loadChildren: () => import('../register/register.module').then( m => m.RegisterPageModule)
+        path: 'viajes',
+        loadChildren: () => import('../viajes/viajes.module').then( m => m.ViajesPageModule),
+        canActivate:[ConexionGuardGuard]
       },
     ]
   }

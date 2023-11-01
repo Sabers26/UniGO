@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/interfaces/usuario';
-import { Storage } from '@ionic/storage-angular';
 import { NavigationExtras, Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AutenticacionFirebaseService } from 'src/app/services/autenticacion-firebase.service';
+import { ToastController } from '@ionic/angular';
+import { AutenticacionStorageService } from 'src/app/services/autenticacion-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -9,42 +12,73 @@ import { NavigationExtras, Router } from '@angular/router';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  form:FormGroup;
 
   usuario:Usuario={
     nombre:'',
     email:'',
     password:''
   }
-  constructor(private storage:Storage, private router:Router) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private router:Router,
+    private authFire:AutenticacionFirebaseService,
+    private toastController:ToastController,
+    private authStorage:AutenticacionStorageService
+    ) { 
+    this.form = this.formBuilder.group({
+      email: ['', [Validators.email, Validators.required]],
+      password: ['', [Validators.required]]
+    });
+  }
 
   ngOnInit() {
   }
 
-  async onSubmit()
+  get errorControl(){
+    return this.form?.controls;
+  }
+
+  async iniciarSesion()
   {
-    let datos = await this.storage.get(this.usuario.email)
-    let error = "Usuario y/o contraseña incorrecta"
-    if(datos!==null)
+    this.usuario.email = this.form.get("email")?.value;
+    this.usuario.password = this.form.get("password")?.value;
+
+    const user = await this.authFire.iniciarSesion(this.usuario).catch((error)=>{
+      if(error.code==="auth/invalid-login-credentials")
+      {
+        this.presentToast("Email y/o contraseña incorrecta")
+      }
+      if(error.code==="auth/too-many-requests")
+      {
+        this.presentToast("Demasiados intentos detectados. La cuenta fue bloqueda")
+      }
+      if(error.code==="auth/network-request-failed")
+      {
+
+      }
+    })
+    if(user)
     {
-      if(this.usuario.password == datos.password)
-      {
-        await this.storage.set("sesion", 1);
-        this.usuario.nombre = datos.nombre
-        let ext:NavigationExtras={
-          state:{
-            credencial: this.usuario
-          }
+      await this.authStorage.iniciarSesion(this.usuario)
+      let extras:NavigationExtras = {
+        state:
+        {
+          datos: this.usuario,
         }
-        this.router.navigate(["tabs/home"], ext)
       }
-      else 
-      {
-        console.log(error)
-      }
-    }
-    else{
-      console.log(error)
+      this.router.navigate(["/tabs/home"], extras)
     }
   }
 
+  async presentToast(mensaje:string)
+  {
+    let toast = await this.toastController.create({
+      message:mensaje,
+      duration:1500,
+      position:"top"
+    })
+
+    await toast.present()
+  }
 }

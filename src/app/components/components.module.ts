@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ToastController } from '@ionic/angular';
 import { HeaderComponent } from './header/header.component';
 
 
@@ -10,7 +10,7 @@ import { HeaderComponent } from './header/header.component';
   exports:[HeaderComponent],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
   ]
 })
 export class ComponentsModule { }
