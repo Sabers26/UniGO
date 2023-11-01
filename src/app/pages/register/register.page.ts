@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { AutenticacionFirebaseService } from 'src/app/services/autenticacion-firebase.service';
+import { StoreFireService } from 'src/app/services/store-fire.service';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,7 @@ export class RegisterPage implements OnInit {
   mensaje_error:string = "";
 
   usuario:Usuario={
-    nombre:'',
+    perfil:{nombre:""},
     email: '',
     password: ''
   }
@@ -25,8 +26,10 @@ export class RegisterPage implements OnInit {
     private registroFire:AutenticacionFirebaseService,
     private router:Router,
     private toastController:ToastController,
+    private storeFire:StoreFireService
     ) {
-    this.form = this.formBuilder.group({
+      this.storeFire.getUsuario(this.usuario)
+      this.form = this.formBuilder.group({
       nombre: ['', [Validators.required]],
       email: ['', [Validators.email, Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -42,7 +45,7 @@ export class RegisterPage implements OnInit {
 
 
   async registrarse(){
-    this.usuario.nombre = this.form.get('nombre')?.value;
+    this.usuario.perfil.nombre = this.form.get('nombre')?.value;
     this.usuario.email = this.form.get('email')?.value;
     this.usuario.password = this.form.get('password')?.value;
     
@@ -54,6 +57,7 @@ export class RegisterPage implements OnInit {
     })
     if(user)
     {
+      this.storeFire.addUsuario(this.usuario)
       this.router.navigate(['/login']); //como hago que esto no suceda si da error AHHHHHHH
     }
   }

@@ -15,7 +15,7 @@ export class LoginPage implements OnInit {
   form:FormGroup;
 
   usuario:Usuario={
-    nombre:'',
+    perfil:{nombre:""},
     email:'',
     password:''
   }

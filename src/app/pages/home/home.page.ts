@@ -10,7 +10,7 @@ import { Usuario } from 'src/app/interfaces/usuario';
 export class HomePage {
 
   usuario:Usuario={
-    nombre:'',
+    perfil:{nombre:""},
     email:'',
     password:''
   }
@@ -25,7 +25,7 @@ export class HomePage {
     if(datos!==undefined)
     {
       let usr=datos["datos"]
-      this.usuario.nombre = usr.nombre
+      this.usuario.perfil.nombre = usr.nombre
       this.usuario.email = usr.email
       this.usuario.password = usr.password
     }
