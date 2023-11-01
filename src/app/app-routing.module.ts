@@ -19,7 +19,15 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
+  },  {
+    path: 'no-conexion',
+    loadChildren: () => import('./pages/no-conexion/no-conexion.module').then( m => m.NoConexionPageModule)
   },
+  {
+    path: 'bienvenida',
+    loadChildren: () => import('./pages/bienvenida/bienvenida.module').then( m => m.BienvenidaPageModule)
+  },
+
 ];
 
 @NgModule({
