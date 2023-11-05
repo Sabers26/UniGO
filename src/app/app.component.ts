@@ -11,7 +11,7 @@ import { NavigationExtras, Router } from '@angular/router';
 })
 export class AppComponent {
   usuario:Usuario = {
-    nombre: "",
+    perfil:{nombre:""},
     email: "",
     password:""
   }
@@ -26,7 +26,7 @@ export class AppComponent {
     let sesion = await this.storage.get("sesion")
     if(sesion)
     {
-      this.usuario.nombre = sesion.nombre
+      this.usuario.perfil.nombre = sesion.nombre
       this.usuario.email = sesion.email
       this.usuario.password = sesion.password
       const user = await this.authFire.iniciarSesion(this.usuario).catch((error)=> {
