@@ -18,6 +18,7 @@ export class AutenticacionFirebaseService {
 
   async iniciarSesion(usuario:Usuario)
   {
+    console.log(usuario.email)
     return await this.auth.signInWithEmailAndPassword(usuario.email, usuario.password)
   }
 
