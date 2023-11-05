@@ -5,5 +5,5 @@ export interface Usuario {
 }
 
 interface Perfil {
-    nombre:""
+    nombre:string
 }

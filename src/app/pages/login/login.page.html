@@ -13,7 +13,7 @@
     </ion-text>
 
     <ion-item>
-        <ion-input required labelPlacement="floating" type="text" aria-label="Contraseña" label="Contraseña" name="password" formControlName="password"></ion-input>
+        <ion-input required labelPlacement="floating" type="password" aria-label="Contraseña" label="Contraseña" name="password" formControlName="password"></ion-input>
     </ion-item>
 
     <ion-text *ngIf="form.get('password')?.errors?.['required'] && form.get('password')?.touched">

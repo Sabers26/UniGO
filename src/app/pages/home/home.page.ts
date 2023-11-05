@@ -15,19 +15,13 @@ export class HomePage {
     password:''
   }
   constructor(private router:Router) {
-    this.carga() //NO TOCAR SIN ESTO VALEMOS VERGA
-  }
-
-  async carga()
-  {
-    let datos = this.router.getCurrentNavigation()?.extras.state;
-
+    let datos = this.router.getCurrentNavigation()?.extras.state
     if(datos!==undefined)
     {
-      let usr=datos["datos"]
-      this.usuario.perfil.nombre = usr.nombre
-      this.usuario.email = usr.email
-      this.usuario.password = usr.password
+      let usr = datos['datos']
+      this.usuario.email=usr.email
+      this.usuario.perfil.nombre=usr.perfil.nombre
     }
   }
+
 }

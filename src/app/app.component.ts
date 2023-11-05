@@ -4,6 +4,7 @@ import { Usuario } from './interfaces/usuario';
 import { AutenticacionFirebaseService } from './services/autenticacion-firebase.service';
 import { ToastController } from '@ionic/angular';
 import { NavigationExtras, Router } from '@angular/router';
+import { StoreFireService } from './services/store-fire.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -26,7 +27,6 @@ export class AppComponent {
     let sesion = await this.storage.get("sesion")
     if(sesion)
     {
-      this.usuario.perfil.nombre = sesion.nombre
       this.usuario.email = sesion.email
       this.usuario.password = sesion.password
       const user = await this.authFire.iniciarSesion(this.usuario).catch((error)=> {
@@ -38,7 +38,7 @@ export class AppComponent {
         if(error.code==="auth/network-request-failed")
         {
           this.presentToast("Error de conexion. . .")
-          this.router.navigate(["/login"]) // pagina sin conexion hay que crearla
+          this.router.navigate(["/no-conexion"]) // pagina sin conexion hay que crearla
         }
       })
       if(user)
@@ -49,7 +49,6 @@ export class AppComponent {
             datos: this.usuario
           }
         }
-        console.log(extras)
         this.router.navigate(["/tabs/home"], extras)
       }
     }

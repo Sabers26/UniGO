@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AutenticacionFirebaseService } from 'src/app/services/autenticacion-firebase.service';
 import { ToastController } from '@ionic/angular';
 import { AutenticacionStorageService } from 'src/app/services/autenticacion-storage.service';
+import { StoreFireService } from 'src/app/services/store-fire.service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,8 @@ export class LoginPage implements OnInit {
     private router:Router,
     private authFire:AutenticacionFirebaseService,
     private toastController:ToastController,
-    private authStorage:AutenticacionStorageService
+    private storeFire:StoreFireService,
+    private authStorage:AutenticacionStorageService,
     ) { 
     this.form = this.formBuilder.group({
       email: ['', [Validators.email, Validators.required]],
@@ -55,11 +57,13 @@ export class LoginPage implements OnInit {
       }
       if(error.code==="auth/network-request-failed")
       {
-
+        this.presentToast("Error de conexion... Verifique su conexion a internet")
       }
     })
     if(user)
     {
+      const nombre = await this.storeFire.getUsuario(this.usuario)
+      this.usuario.perfil.nombre=nombre
       await this.authStorage.iniciarSesion(this.usuario)
       let extras:NavigationExtras = {
         state:

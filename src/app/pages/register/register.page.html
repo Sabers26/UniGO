@@ -25,7 +25,7 @@
         </ion-text>
 
         <ion-item>
-            <ion-input required labelPlacement="floating" [minlength]="6" type="text" aria-label="Contraseña" label="Contraseña" name="password" formControlName="password"></ion-input>
+            <ion-input required labelPlacement="floating" [minlength]="6" type="password" aria-label="Contraseña" label="Contraseña" name="password" formControlName="password"></ion-input>
         </ion-item>
 
         <ion-text color="primary" *ngIf="form.get('password')?.errors?.['minlength'] && form.get('password')?.touched">
