@@ -38,7 +38,7 @@ export class AppComponent {
         if(error.code==="auth/network-request-failed")
         {
           this.presentToast("Error de conexion. . .")
-          this.router.navigate(["/login"]) // pagina sin conexion hay que crearla
+          this.router.navigate(["/no-conexion"]) // pagina sin conexion hay que crearla
         }
       })
       if(user)
@@ -49,7 +49,6 @@ export class AppComponent {
             datos: this.usuario
           }
         }
-        console.log(extras)
         this.router.navigate(["/tabs/home"], extras)
       }
     }
