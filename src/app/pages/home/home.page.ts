@@ -28,15 +28,14 @@ export class HomePage {
   }
   sesion:Sesion={
     id:0,
-    usr:this.usuario
+    usr:this.usuario,
+    aut:this.auto
   }
   constructor(private router:Router, private authStorage:AutenticacionStorageService) {
     this.authStorage.getSesion().then(item=>{
       this.sesion.id=item.id
       this.sesion.usr=item.usr
     })
-
-    
   }
   pedir(){
     this.router.navigate(['/tabs/viajes'])

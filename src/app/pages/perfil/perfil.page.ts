@@ -5,7 +5,7 @@ import { Usuario } from 'src/app/interfaces/usuario';
 import { AutenticacionStorageService } from 'src/app/services/autenticacion-storage.service';
 import { AutoServicioService } from 'src/app/services/auto-servicio.service';
 import { Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-perfil',
@@ -29,19 +29,16 @@ export class PerfilPage implements OnInit {
   }
   sesion:Sesion={
     id:0,
-    usr:this.usuario
+    usr:this.usuario,
+    aut:this.auto
   }
   idAuto:any=''
-  constructor(private authStorage:AutenticacionStorageService, private autoFire:AutoServicioService, private router:Router, private navController:NavController) {
+  constructor(private authStorage:AutenticacionStorageService, private autoFire:AutoServicioService, private router:Router) {
     this.authStorage.getSesion().then(item=>{
       this.sesion.id=item.id
-      this.sesion.usr=item.usr
-      this.autoFire.getAuto(this.usuario).then(item=>{
-        if(item!==undefined)
-        {
-          this.auto=item
-        }
-      })
+      this.usuario=item.usr
+      this.auto=item.aut
+      
     })
 
   }
@@ -50,8 +47,7 @@ export class PerfilPage implements OnInit {
 
   async agregarAuto()
   {
-    this.auto.conductor=this.usuario.email
-    await this.autoFire.addAuto(this.auto)
+    this.router.navigate(['/tabs/nuevo-auto'])
   }
 
   modificarDatos()

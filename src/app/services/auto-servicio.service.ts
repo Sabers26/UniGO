@@ -23,7 +23,7 @@ export class AutoServicioService {
 
   async addAuto(auto:Auto)
   {
-    this.collectionAuto.add(auto)
+    return await this.collectionAuto.add(auto)
   }
   
   async getAuto(usuario:Usuario):Promise<any>
