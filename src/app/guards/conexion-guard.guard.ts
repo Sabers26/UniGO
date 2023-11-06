@@ -16,7 +16,8 @@ export class ConexionGuardGuard implements CanActivate {
   
   async getSesion()
   {
-    if(await this.authStorage.getSesion()===2)
+    const sesionStorage=await this.authStorage.getSesion()
+    if(sesionStorage.id==1)
     {
       return true
     }

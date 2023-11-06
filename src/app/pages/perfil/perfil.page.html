@@ -1,5 +1,50 @@
-<app-header titulo="Perfil" inicio="1"></app-header>
+<app-header titulo="Perfil"></app-header>
 
-<ion-content class="ion-padding">
-  <h1>Soy el perfil</h1>
+<ion-content class="ion-padding" >
+  <ion-item>
+    <ion-label>Nombre Usuario</ion-label>
+    <p>{{sesion.usr.perfil.nombre}}</p>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Email</ion-label>
+    <p>{{sesion.usr.email}}</p>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Contraseña</ion-label>
+    <p>********</p>
+  </ion-item>
+
+  <ion-item *ngIf="auto.patente!==''">
+    <ion-label>Patente</ion-label>
+    <p>{{auto.patente}}</p>
+  </ion-item>
+
+  <ion-item *ngIf="auto.patente!==''">
+    <ion-label>Modelo</ion-label>
+    <p>{{auto.modelo}}</p>
+  </ion-item>
+
+  <ion-item *ngIf="auto.patente!==''">
+    <ion-label>Color</ion-label>
+    <p>{{auto.color}}</p>
+  </ion-item>
+
+  <ion-item *ngIf="auto.patente!==''">
+    <ion-label>Capacidad</ion-label>
+    <p>{{auto.capacidad}}</p>
+  </ion-item>
+
+  <ion-button *ngIf="auto.patente==''" (click)="agregarAuto()" expand="block" shape="round">
+    Agregar Auto
+  </ion-button>
+
+  <ion-button *ngIf="auto.patente!==''" (click)="eliminarAuto()" expand="block" shape="round">
+    Eliminar auto
+  </ion-button>
+
+  <ion-button (click)="modificarDatos()" expand="block" shape="round">
+    Modificar Datos
+  </ion-button>
 </ion-content>
