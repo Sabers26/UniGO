@@ -16,10 +16,12 @@ export class RegisterPage implements OnInit {
   mensaje_error:string = "";
 
   usuario:Usuario={
+    email:"",
+    password:"",
     perfil:{nombre:""},
-    email: '',
-    password: ''
+    patente:""
   }
+  
 
   constructor(
     private formBuilder: FormBuilder, 

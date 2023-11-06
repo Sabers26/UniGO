@@ -13,17 +13,17 @@ const routes: Routes = [
       {
         path: 'home',
         loadChildren: () => import('../home/home.module').then( m => m.HomePageModule),
-        canActivate:[NoConexionGuardGuard]
+        canActivate:[ConexionGuardGuard]
       },
       {
         path: 'perfil',
         loadChildren: () => import('../perfil/perfil.module').then( m => m.PerfilPageModule),
-        canActivate:[NoConexionGuardGuard]
+        canActivate:[ConexionGuardGuard]
       },
       {
         path: 'viajes',
         loadChildren: () => import('../viajes/viajes.module').then( m => m.ViajesPageModule),
-        canActivate:[ConexionGuardGuard]
+        canActivate:[NoConexionGuardGuard]
       },
     ]
   }

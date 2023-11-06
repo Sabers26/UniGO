@@ -5,6 +5,7 @@ import { AutenticacionFirebaseService } from './services/autenticacion-firebase.
 import { ToastController } from '@ionic/angular';
 import { NavigationExtras, Router } from '@angular/router';
 import { StoreFireService } from './services/store-fire.service';
+import { AutenticacionStorageService } from './services/autenticacion-storage.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -14,45 +15,18 @@ export class AppComponent {
   usuario:Usuario = {
     perfil:{nombre:""},
     email: "",
-    password:""
+    password:"",
+    patente:''
   }
   constructor(private storage:Storage, 
-    private authFire:AutenticacionFirebaseService, 
+    private authFire:AutenticacionFirebaseService,
+    private authStorage:AutenticacionStorageService,
     private toastController:ToastController,
     private router:Router) {}
 
   async ngOnInit() 
   {
     await this.storage.create();
-    let sesion = await this.storage.get("sesion")
-    if(sesion)
-    {
-      this.usuario.email = sesion.email
-      this.usuario.password = sesion.password
-      this.usuario.perfil.nombre=sesion.perfil.nombre
-      const user = await this.authFire.iniciarSesion(this.usuario).catch((error)=> {
-        if(error.code==="auth/invalid-login-credentials")
-        {
-          this.presentToast("Error al intentar iniciar sesion")
-          this.router.navigate(["/login"])
-        }
-        if(error.code==="auth/network-request-failed")
-        {
-          this.presentToast("Error de conexion. . .")
-          this.router.navigate(["/no-conexion"]) // pagina sin conexion hay que crearla
-        }
-      })
-      if(user)
-      {
-        let extras:NavigationExtras = {
-          state:
-          {
-            datos: this.usuario
-          }
-        }
-        this.router.navigate(["/tabs/home"], extras)
-      }
-    }
   }
 
   async presentToast(mensaje:string)

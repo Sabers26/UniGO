@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Usuario } from '../interfaces/usuario';
 import { map } from 'rxjs/operators';
-import { Subscriber } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +22,7 @@ export class StoreFireService {
     return await this.collectionUsuario.add(usuario)
   }
 
-  async getUsuario(usuario:Usuario):Promise<string>
+  async getUsuario(usuario:Usuario):Promise<any>
   {
     return new Promise((resolve,reject) =>{
       let usr:Usuario[]
@@ -35,8 +34,10 @@ export class StoreFireService {
       )).subscribe(data=>{
         usr=data
         usr.forEach(item=>{
-          nombre = item.perfil.nombre
-          resolve(nombre)
+          if(item.email==usuario.email)
+          {
+            resolve(item)
+          }
         })
       }, error=>{
         reject(error)

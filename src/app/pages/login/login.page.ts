@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/interfaces/usuario';
-import { NavigationExtras, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AutenticacionFirebaseService } from 'src/app/services/autenticacion-firebase.service';
 import { ToastController } from '@ionic/angular';
 import { AutenticacionStorageService } from 'src/app/services/autenticacion-storage.service';
 import { StoreFireService } from 'src/app/services/store-fire.service';
+import { Auto } from 'src/app/interfaces/auto';
+import { AutoServicioService } from 'src/app/services/auto-servicio.service';
 
 @Component({
   selector: 'app-login',
@@ -18,9 +20,21 @@ export class LoginPage implements OnInit {
   usuario:Usuario={
     perfil:{nombre:""},
     email:'',
-    password:''
+    password:'',
+    patente:""
   }
+<<<<<<< HEAD
   
+=======
+  auto:Auto={
+    patente:'',
+    modelo:'',
+    color:"",
+    capacidad:0,
+    conductor:''
+  }
+  idUsuario:any=""
+>>>>>>> 09473b0e85e4a35342d44e79aaea15a3ffb905ed
   constructor(
     private formBuilder: FormBuilder,
     private router:Router,
@@ -28,6 +42,7 @@ export class LoginPage implements OnInit {
     private toastController:ToastController,
     private storeFire:StoreFireService,
     private authStorage:AutenticacionStorageService,
+    private autoFire:AutoServicioService
     ) { 
     this.form = this.formBuilder.group({
       email: ['', [Validators.email, Validators.required]],
@@ -58,21 +73,30 @@ export class LoginPage implements OnInit {
       }
       if(error.code==="auth/network-request-failed")
       {
-        this.presentToast("Error de conexion... Verifique su conexion a internet")
+        this.presentToast("Error de conexion...Verifique su conexion a internet")
       }
     })
     if(user)
     {
-      const nombre = await this.storeFire.getUsuario(this.usuario)
-      this.usuario.perfil.nombre=nombre
-      await this.authStorage.iniciarSesion(this.usuario)
-      let extras:NavigationExtras = {
-        state:
+      await this.storeFire.getUsuario(this.usuario).then(item=>{
+        if(item!==undefined)
         {
-          datos: this.usuario,
+          this.idUsuario=item.id
+          this.usuario.email=item.email
+          this.usuario.perfil=item.perfil
         }
+      })
+      const autito = await this.autoFire.getAuto(this.usuario)
+      if(autito!==undefined)
+      {
+        this.auto.patente=autito.patente
+        this.auto.modelo=autito.modelo
+        this.auto.color=autito.color
+        this.auto.capacidad=autito.capacidad
+        this.auto.conductor=autito.conductor
       }
-      this.router.navigate(["/tabs/home"], extras)
+      await this.authStorage.iniciarSesion(1, this.usuario, this.auto)
+      this.router.navigate(["/tabs/home"])
     }
   }
 
