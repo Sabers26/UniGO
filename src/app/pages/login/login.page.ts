@@ -20,6 +20,7 @@ export class LoginPage implements OnInit {
     email:'',
     password:''
   }
+  
   constructor(
     private formBuilder: FormBuilder,
     private router:Router,
