@@ -27,11 +27,9 @@ export class AppComponent {
     let sesion = await this.storage.get("sesion")
     if(sesion)
     {
-      console.log(this.usuario)
       this.usuario.email = sesion.email
       this.usuario.password = sesion.password
       this.usuario.perfil.nombre=sesion.perfil.nombre
-      console.log(this.usuario.perfil.nombre)
       const user = await this.authFire.iniciarSesion(this.usuario).catch((error)=> {
         if(error.code==="auth/invalid-login-credentials")
         {

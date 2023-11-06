@@ -1,8 +1,9 @@
 <app-header titulo="Inicio"></app-header>
 
-<ion-content class="ion-padding">
-  <ion-text color="dark">
-    <h4>¡Hola! {{usuario.perfil.nombre}}</h4>
+<ion-content class="ion-padding" >
+  <ion-text color="dark" style="text-align: center;">
+    <p>¡Hola! {{usuario.perfil.nombre}}</p>
+    <h2>-----------------------------------------</h2>
   </ion-text>
   <ion-card color="danger">
     <ion-card-header>
@@ -14,7 +15,7 @@
       A las 16:00 saldre hacia talcahuano, puedo dejarlos en sus casas si no se desvia tanto de la ruta principal.
     </ion-card-content>
 
-    <ion-button (click)="pedir()" expand="block" shape="round">
+    <ion-button (click)="pedir()" expand="block">
       3.300$
     </ion-button>
   </ion-card>
