@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Auto } from 'src/app/interfaces/auto';
 import { Usuario } from 'src/app/interfaces/usuario';
 
 @Component({
@@ -14,14 +15,16 @@ export class NuevoAutoPage implements OnInit {
   usuario:Usuario={
     perfil:{nombre:""},
     email:'',
-    password:''
+    password:'',
+    patente:''
   }
 
   auto:Auto={
     patente:'',
     modelo:'',
     color:'',
-    capacidad:0
+    capacidad:0,
+    conductor:''
   }
 
   constructor(

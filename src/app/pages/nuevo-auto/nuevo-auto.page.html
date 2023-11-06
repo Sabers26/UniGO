@@ -4,22 +4,36 @@
   <form [formGroup]="form" (ngSubmit)="agregar()">
 
     <ion-item>
-      <ion-input required labelPlacement="floating" type="text" aria-label="patente" label="patente" name="patente" formControlName="patente"></ion-input>
+      <ion-input required labelPlacement="floating" [minlength]="6" [maxlength]="6" type="text" aria-label="patente" label="patente" name="patente" formControlName="patente"></ion-input>
     </ion-item>
+
+    <ion-text color="primary" *ngIf="form.get('patente')?.errors?.['required'] && form.get('patente')?.touched">
+      <p style="margin-left: 5%; color: #ff0000;">Patente mal ingresada (6 digitos)</p>
+    </ion-text>
 
     <ion-item>
       <ion-input required labelPlacement="floating" type="text" aria-label="modelo" label="modelo" name="modelo" formControlName="modelo"></ion-input>
     </ion-item>
 
+    <ion-text color="primary" *ngIf="form.get('modelo')?.errors?.['required'] && form.get('modelo')?.touched">
+      <p style="margin-left: 5%; color: #ff0000;">El modelo es requerido</p>
+    </ion-text>
+
     <ion-item>
       <ion-input required labelPlacement="floating" type="text" aria-label="color" label="color" name="color" formControlName="color"></ion-input>
     </ion-item>
 
+    <ion-text color="primary" *ngIf="form.get('color')?.errors?.['required'] && form.get('color')?.touched">
+      <p style="margin-left: 5%; color: #ff0000;">El color es requerido</p>
+    </ion-text>
+
     <ion-item>
-      <ion-input required labelPlacement="floating" [minlength]="6" [maxlength]="6" type="number" aria-label="capacidad" label="capacidad" name="capacidad" formControlName="capacidad"></ion-input>
+      <ion-input required labelPlacement="floating" [minlength]="1" [maxlength]="6" type="number" aria-label="capacidad" label="capacidad" name="capacidad" formControlName="capacidad"></ion-input>
     </ion-item>
 
-    
+    <ion-text color="primary" *ngIf="form.get('capacidad')?.errors?.['required'] && form.get('capacidad')?.touched">
+      <p style="margin-left: 5%; color: #ff0000;">La capadidad es requerida (maximo 6)</p>
+    </ion-text>
 
     <ion-button block color="primary" type="submit" [disabled]="form.invalid">
       Login
