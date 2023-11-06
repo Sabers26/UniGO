@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/interfaces/usuario';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AutenticacionFirebaseService } from 'src/app/services/autenticacion-firebase.service';
 import { ToastController } from '@ionic/angular';
@@ -40,10 +40,10 @@ export class LoginPage implements OnInit {
     private authStorage:AutenticacionStorageService,
     private autoFire:AutoServicioService
     ) { 
-    this.form = this.formBuilder.group({
-      email: ['', [Validators.email, Validators.required]],
-      password: ['', [Validators.required]]
-    });
+      this.form = this.formBuilder.group({
+        email: ['', [Validators.email, Validators.required]],
+        password: ['', [Validators.required]]
+      });
   }
 
   ngOnInit() {
