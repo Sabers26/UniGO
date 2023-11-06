@@ -23,5 +23,7 @@ export class HomePage {
       this.usuario.perfil.nombre=usr.perfil.nombre
     }
   }
-
+  pedir(){
+    this.router.navigate(['/tabs/viajes'])
+  }
 }
