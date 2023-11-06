@@ -1,0 +1,28 @@
+<app-header titulo="Nuevo auto" inicio="1"></app-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="agregar()">
+
+    <ion-item>
+      <ion-input required labelPlacement="floating" type="text" aria-label="patente" label="patente" name="patente" formControlName="patente"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input required labelPlacement="floating" type="text" aria-label="modelo" label="modelo" name="modelo" formControlName="modelo"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input required labelPlacement="floating" type="text" aria-label="color" label="color" name="color" formControlName="color"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input required labelPlacement="floating" [minlength]="6" [maxlength]="6" type="number" aria-label="capacidad" label="capacidad" name="capacidad" formControlName="capacidad"></ion-input>
+    </ion-item>
+
+    
+
+    <ion-button block color="primary" type="submit" [disabled]="form.invalid">
+      Login
+    </ion-button>
+  </form>
+</ion-content>

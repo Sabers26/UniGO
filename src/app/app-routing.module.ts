@@ -27,7 +27,11 @@ const routes: Routes = [
   {
     path: 'bienvenida',
     loadChildren: () => import('./pages/bienvenida/bienvenida.module').then( m => m.BienvenidaPageModule)
+  },  {
+    path: 'nuevo-auto',
+    loadChildren: () => import('./pages/nuevo-auto/nuevo-auto.module').then( m => m.NuevoAutoPageModule)
   },
+
 
 ];
 

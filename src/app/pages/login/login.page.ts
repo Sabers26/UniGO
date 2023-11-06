@@ -23,6 +23,9 @@ export class LoginPage implements OnInit {
     password:'',
     patente:""
   }
+<<<<<<< HEAD
+  
+=======
   auto:Auto={
     patente:'',
     modelo:'',
@@ -31,6 +34,7 @@ export class LoginPage implements OnInit {
     conductor:''
   }
   idUsuario:any=""
+>>>>>>> 09473b0e85e4a35342d44e79aaea15a3ffb905ed
   constructor(
     private formBuilder: FormBuilder,
     private router:Router,
