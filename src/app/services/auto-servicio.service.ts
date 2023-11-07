@@ -48,4 +48,31 @@ export class AutoServicioService {
         })
       })
   }
+
+  async deleteAuto(auto:Auto)
+  {
+    return new Promise((resolve, reject) =>{
+      let autos:Auto[]=[]
+      let idAuto:any=''
+      this.collectionAuto.snapshotChanges().pipe(
+        map(item=> 
+          item.map(u=>
+            ({id:u.payload.doc.id, ...u.payload.doc.data()}))
+        )).subscribe(data=>{
+          idAuto=data[0].id
+          autos=data
+          autos.forEach(item=>{
+            if(item.conductor==auto.conductor)
+            {
+              this.collectionAuto.doc(idAuto).delete()
+              resolve(true)
+            }
+            resolve(false)
+          })
+          resolve(undefined)
+        }, error=>{
+          reject(error)
+        })
+      })
+  }
 }

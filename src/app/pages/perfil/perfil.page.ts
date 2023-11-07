@@ -1,3 +1,4 @@
+
 import { Sesion } from 'src/app/interfaces/sesion';
 import { Auto } from './../../interfaces/auto';
 import { Component, OnInit } from '@angular/core';
@@ -5,6 +6,7 @@ import { Usuario } from 'src/app/interfaces/usuario';
 import { AutenticacionStorageService } from 'src/app/services/autenticacion-storage.service';
 import { AutoServicioService } from 'src/app/services/auto-servicio.service';
 import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -33,16 +35,18 @@ export class PerfilPage implements OnInit {
     aut:this.auto
   }
   idAuto:any=''
-  constructor(private authStorage:AutenticacionStorageService, private autoFire:AutoServicioService, private router:Router) {
+  constructor(
+    private authStorage:AutenticacionStorageService, 
+    private autoFire:AutoServicioService, private router:Router) {
     this.authStorage.getSesion().then(item=>{
       this.sesion.id=item.id
       this.usuario=item.usr
       this.auto=item.aut
-      
     })
-
   }
+
   ngOnInit() {
+    
   }
 
   async agregarAuto()
@@ -57,6 +61,19 @@ export class PerfilPage implements OnInit {
 
   eliminarAuto()
   {
-
+    this.autoFire.deleteAuto(this.auto).then(item=>{
+      if(item)
+      {
+        this.auto={
+    
+          patente:"",
+          color:"",
+          modelo:"",
+          capacidad:0,
+          conductor:""
+        }
+        this.authStorage.iniciarSesion(this.sesion.id, this.usuario, this.auto)
+      }
+    })
   }
 }
