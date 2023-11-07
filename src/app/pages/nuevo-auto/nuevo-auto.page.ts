@@ -6,6 +6,7 @@ import { Sesion } from 'src/app/interfaces/sesion';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { AutenticacionStorageService } from 'src/app/services/autenticacion-storage.service';
 import { AutoServicioService } from 'src/app/services/auto-servicio.service';
+import { Viaje } from '../../interfaces/viaje';
 
 @Component({
   selector: 'app-nuevo-auto',
@@ -29,11 +30,19 @@ export class NuevoAutoPage implements OnInit {
     capacidad:0,
     conductor:''
   }
-  
+  viaje:Viaje={
+    direccion:'',
+    costo:0,
+    conductor:this.usuario,
+    auto:this.auto,
+    pasajeros:[],
+    estado:false
+  }
   sesion:Sesion={
     id:0,
     usr:this.usuario,
-    aut:this.auto
+    aut:this.auto,
+    viaje:this.viaje
   }
 
   constructor(
@@ -75,7 +84,7 @@ export class NuevoAutoPage implements OnInit {
 
     if(autoUsuario)
     {
-      await this.authStorage.iniciarSesion(this.sesion.id, this.usuario,this.auto)
+      await this.authStorage.iniciarSesion(this.sesion.id, this.usuario,this.auto, this.viaje)
       this.router.navigate(['/tabs/perfil'])
     }
   }

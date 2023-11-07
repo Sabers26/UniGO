@@ -6,5 +6,6 @@ export interface Viaje {
     costo:number,
     conductor:Usuario,
     auto:Auto,
-    pasajeros:Usuario[]
+    pasajeros:Usuario[],
+    estado:boolean
 }

@@ -8,6 +8,8 @@ import { AutenticacionStorageService } from 'src/app/services/autenticacion-stor
 import { StoreFireService } from 'src/app/services/store-fire.service';
 import { Auto } from 'src/app/interfaces/auto';
 import { AutoServicioService } from 'src/app/services/auto-servicio.service';
+import { Viaje } from '../../interfaces/viaje';
+import { ViajeServicioService } from 'src/app/services/viajes/viaje-servicio.service';
 
 @Component({
   selector: 'app-login',
@@ -31,6 +33,16 @@ export class LoginPage implements OnInit {
     capacidad:0,
     conductor:''
   }
+
+  viaje:Viaje={
+    direccion:'',
+    costo:0,
+    conductor:this.usuario,
+    auto:this.auto,
+    pasajeros:[],
+    estado:false
+  }
+
   idUsuario:any=""
   constructor(
     private formBuilder: FormBuilder,
@@ -39,7 +51,8 @@ export class LoginPage implements OnInit {
     private toastController:ToastController,
     private storeFire:StoreFireService,
     private authStorage:AutenticacionStorageService,
-    private autoFire:AutoServicioService
+    private autoFire:AutoServicioService,
+    private viajeFire:ViajeServicioService
     ) { 
       this.form = this.formBuilder.group({
         email: ['', [Validators.email, Validators.required]],
@@ -92,7 +105,8 @@ export class LoginPage implements OnInit {
         this.auto.capacidad=autito.capacidad
         this.auto.conductor=autito.conductor
       }
-      await this.authStorage.iniciarSesion(1, this.usuario, this.auto)
+      const viajesito=await this.viajeFire.getViaje(this.usuario)
+      await this.authStorage.iniciarSesion(1, this.usuario, this.auto, this.viaje)
       this.router.navigate(["/tabs/home"])
     }
   }

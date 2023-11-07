@@ -6,6 +6,7 @@ import { Usuario } from 'src/app/interfaces/usuario';
 import { AutenticacionStorageService } from 'src/app/services/autenticacion-storage.service';
 import { AutoServicioService } from 'src/app/services/auto-servicio.service';
 import { Router } from '@angular/router';
+import { Viaje } from 'src/app/interfaces/viaje';
 
 
 
@@ -29,10 +30,19 @@ export class PerfilPage implements OnInit {
     capacidad:0,
     conductor:""
   }
+  viaje:Viaje={
+    direccion:'',
+    costo:0,
+    conductor:this.usuario,
+    auto:this.auto,
+    pasajeros:[],
+    estado:false
+  }
   sesion:Sesion={
     id:0,
     usr:this.usuario,
-    aut:this.auto
+    aut:this.auto,
+    viaje:this.viaje
   }
   idAuto:any=''
   constructor(
@@ -72,7 +82,7 @@ export class PerfilPage implements OnInit {
           capacidad:0,
           conductor:""
         }
-        this.authStorage.iniciarSesion(this.sesion.id, this.usuario, this.auto)
+        this.authStorage.iniciarSesion(this.sesion.id, this.usuario, this.auto, this.viaje)
       }
     })
   }

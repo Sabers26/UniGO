@@ -5,18 +5,20 @@
     <p>¡Hola! {{sesion.usr.perfil.nombre}}</p>
     <h2>-----------------------------------------</h2>
   </ion-text>
-  <ion-card color="danger">
-    <ion-card-header>
-      <ion-card-title>DUOC UC - San Andres</ion-card-title>
-      <ion-card-subtitle>Viaje a Talcahuano - 16:00</ion-card-subtitle>
-    </ion-card-header>
+  <ion-item *ngFor="let viaje of viajes">
+    <ion-card color="danger">
+      <ion-card-header>
+        <ion-card-title>DUOC UC - San Andres</ion-card-title>
+        <ion-card-subtitle>Viaje a {{viaje.direccion}} - 16:00</ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content>
+        A las 16:00 saldre hacia talcahuano, puedo dejarlos en sus casas si no se desvia tanto de la ruta principal.
+      </ion-card-content>
   
-    <ion-card-content>
-      A las 16:00 saldre hacia talcahuano, puedo dejarlos en sus casas si no se desvia tanto de la ruta principal.
-    </ion-card-content>
-
-    <ion-button (click)="pedir()" expand="block">
-      3.300$
-    </ion-button>
-  </ion-card>
+      <ion-button (click)="pedir(viaje.conductor)" expand="block">
+        {{viaje.costo}}$
+      </ion-button>
+    </ion-card>
+  </ion-item>
 </ion-content>
