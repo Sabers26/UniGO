@@ -60,7 +60,7 @@ export class HomePage {
     this.viajeFire.aggPasajero(this.sesion.usr, conductor).then(item=>{
       if(item)
       {
-        this.router.navigate(['/tabs/perfil'])
+        this.router.navigate(['/tabs/viajes'])
       }
     })
   }
