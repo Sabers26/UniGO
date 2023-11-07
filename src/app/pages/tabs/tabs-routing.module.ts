@@ -30,6 +30,11 @@ const routes: Routes = [
         loadChildren: () => import('../nuevo-auto/nuevo-auto.module').then( m => m.NuevoAutoPageModule),
         canActivate:[ConexionGuardGuard]
       },
+      {
+        path: 'nuevo-viaje',
+        loadChildren: () => import('../nuevo-viaje/nuevo-viaje.module').then( m => m.NuevoViajePageModule),
+        canActivate:[ConexionGuardGuard]
+      },
     ]
   }
 ];

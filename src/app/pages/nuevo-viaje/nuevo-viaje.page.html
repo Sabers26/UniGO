@@ -1,0 +1,26 @@
+<app-header titulo="Nuevo viaje" inicio="1"></app-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="agregar()">
+
+    <ion-item>
+      <ion-input required labelPlacement="floating" type="text" aria-label="direccion" label="direccion" name="direccion" formControlName="direccion"></ion-input>
+    </ion-item>
+
+    <ion-text color="primary" *ngIf="form.get('direccion')?.errors?.['required'] && form.get('direccion')?.touched">
+      <p style="margin-left: 5%; color: #ff0000;">La direccion es requerida</p>
+    </ion-text>
+
+    <ion-item>
+      <ion-input required labelPlacement="floating" [minlength]="1" [maxlength]="5" type="number" aria-label="costo" label="costo" name="costo" formControlName="costo"></ion-input>
+    </ion-item>
+
+    <ion-text color="primary" *ngIf="form.get('costo')?.errors?.['required'] && form.get('costo')?.touched">
+      <p style="margin-left: 5%; color: #ff0000;">El costo es requerida (maximo 99.999)</p>
+    </ion-text>
+
+    <ion-button block color="primary" type="submit" [disabled]="form.invalid" expand="block" shape="round">
+      Agregar viaje
+    </ion-button>
+  </form>
+</ion-content>

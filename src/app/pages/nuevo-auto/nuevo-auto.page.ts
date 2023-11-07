@@ -29,6 +29,7 @@ export class NuevoAutoPage implements OnInit {
     capacidad:0,
     conductor:''
   }
+  
   sesion:Sesion={
     id:0,
     usr:this.usuario,
