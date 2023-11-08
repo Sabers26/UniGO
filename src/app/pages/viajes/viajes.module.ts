@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ViajesPageRoutingModule } from './viajes-routing.module';
 
 import { ViajesPage } from './viajes.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ViajesPageRoutingModule
+    ViajesPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [ViajesPage]
 })
