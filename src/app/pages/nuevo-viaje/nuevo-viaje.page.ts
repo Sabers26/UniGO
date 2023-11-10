@@ -13,6 +13,8 @@ export class NuevoViajePage implements OnInit {
   form:FormGroup;
 
   fecha_viaje:Date = new Date()
+  hora_salida!:string;
+  
   usuario:Usuario={
     email:"",
     password:"",
