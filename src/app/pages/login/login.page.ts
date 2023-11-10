@@ -1,7 +1,11 @@
+import { UsuarioStorageService } from './../../services/storage/usuario-storage.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
+import { Usuario } from 'src/app/interfaces/usuario';
+import { AuthService } from 'src/app/services/auth-firebase/auth.service';
+import { UsuarioService } from 'src/app/services/firestore/usuario/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -11,10 +15,18 @@ import { ToastController } from '@ionic/angular';
 export class LoginPage implements OnInit {
   form:FormGroup;
 
-  idUsuario:any=""
+  usuario:Usuario={
+    email:"",
+    password:"",
+    nombre:"",
+  }
+
   constructor(
     private formBuilder: FormBuilder,
     private router:Router,
+    private storage:UsuarioStorageService,
+    private fireStore:UsuarioService,
+    private authFire:AuthService,
     private toastController:ToastController,
     ) { 
       this.form = this.formBuilder.group({
@@ -30,12 +42,18 @@ export class LoginPage implements OnInit {
     return this.form?.controls;
   }
 
-  async iniciarSesion()
+  async login()
   {
-    //this.usuario.email = this.form.get("email")?.value;
-    //this.usuario.password = this.form.get("password")?.value;
+    this.usuario.email = this.form.get("email")?.value;
+    this.usuario.password = this.form.get("password")?.value;
 
-    /*const user = await this.authFire.iniciarSesion(this.usuario).catch((error)=>{
+    await this.authFire.login(this.usuario).then(()=>{
+      this.fireStore.obtenerUsuario(this.usuario).then((datosUsuario)=>{
+        this.usuario=datosUsuario
+        this.storage.login(this.usuario)
+        this.router.navigate(["/tabs/home"])
+      })
+    }).catch((error)=>{
       if(error.code==="auth/invalid-login-credentials")
       {
         this.presentToast("Email y/o contraseña incorrecta")
@@ -48,7 +66,7 @@ export class LoginPage implements OnInit {
       {
         this.presentToast("Error de conexion...Verifique su conexion a internet")
       }
-    })*/
+    })
   }
 
   async presentToast(mensaje:string)

@@ -3,7 +3,7 @@
 <ion-content class="ion-padding">
   <ion-img src="assets/UNIGO.png" style="width: 150px; margin: auto;"></ion-img>
 
-  <form [formGroup]="form" (ngSubmit)="iniciarSesion()">
+  <form [formGroup]="form" (ngSubmit)="login()">
     <ion-item>
         <ion-input required labelPlacement="floating" type="email" aria-label="Email" label="E-mail" name="email" formControlName="email"></ion-input>
     </ion-item>
