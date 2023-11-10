@@ -24,4 +24,8 @@ export class AuthService {
   {
     await this.authFire.signOut()
   }
+
+  async recuperar(usuario:Usuario){
+    return await this.authFire.sendPasswordResetEmail(usuario.email)
+  }
 }
