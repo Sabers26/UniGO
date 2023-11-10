@@ -13,6 +13,16 @@ import { UsuarioService } from 'src/app/services/firestore/usuario/usuario.servi
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  handleRefresh(event:any) {
+    setTimeout(() => {
+      this.form = this.formBuilder.group({
+        email: ['', [Validators.email, Validators.required]],
+        password: ['', [Validators.required]]
+      });
+      event.target.complete();
+    }, 2000);
+  }
+
   form:FormGroup;
 
   usuario:Usuario={

@@ -8,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 export class BienvenidaPage implements OnInit {
 
   constructor() { }
-
+  
+  handleRefresh(event:any) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      event.target.complete();
+    }, 2000);
+  }
   ngOnInit() {
   }
 

@@ -1,9 +1,14 @@
 <app-header titulo="Perfil" inicio="1" [barraCarga]="bandera"></app-header>
 
-<ion-content class="ion-padding" >
-  <ion-list>
-    <h4>Informacion Personal:</h4>
 
+<ion-content class="ion-padding">
+  <ion-refresher slot="fixed" #myRefresher (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+<ion-content class="ion-padding" >
+  <h4>Informacion de Usuario:</h4>
+  <ion-list [inset]="true">
     <ion-item>
       <ion-label>
         <h2>Nombre de usuario:</h2>
@@ -26,6 +31,37 @@
     </ion-item>
   </ion-list>
 
+  <h4 *ngIf="usuario.auto!==undefined">Informacion de Automovil</h4>
+  <ion-list *ngIf="usuario.auto!==undefined" [inset]="true">
+    <ion-item>
+      <ion-label>
+        <h2>Modelo:</h2>
+        <p>{{usuario.auto.modelo}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <h2>Color:</h2>
+        <p>{{usuario.auto.color}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <h2>Patente:</h2>
+        <p>{{usuario.auto.patente}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <h2>Capacidad de pasajeros:</h2>
+        <p>{{usuario.auto.capacidad}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button>
       <ion-icon name="chevron-up-outline"></ion-icon>
@@ -33,7 +69,7 @@
     <ion-fab-list side="top">
       <ion-fab-button (click)="logOut()"><ion-icon name="log-out-outline"></ion-icon></ion-fab-button>
       <ion-fab-button><ion-icon name="create-outline"></ion-icon></ion-fab-button>
-      <ion-fab-button><ion-icon name="car-sport-outline"></ion-icon></ion-fab-button>
+      <ion-fab-button routerLink="/tabs/nuevo-auto"><ion-icon name="car-sport-outline"></ion-icon></ion-fab-button>
     </ion-fab-list>
   </ion-fab>
 </ion-content>

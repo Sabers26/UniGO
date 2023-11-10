@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
+import { IonRefresher } from '@ionic/angular';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { AuthService } from 'src/app/services/auth-firebase/auth.service';
 import { UsuarioStorageService } from 'src/app/services/storage/usuario-storage.service';
@@ -10,19 +11,40 @@ import { UsuarioStorageService } from 'src/app/services/storage/usuario-storage.
   styleUrls: ['./perfil.page.scss'],
 })
 export class PerfilPage implements OnInit {
+
+  handleRefresh(event:any) {
+    setTimeout(() => {
+      this.storage.getSesion().then((datosUsuario)=>{
+        this.bandera=false
+        this.usuario=datosUsuario
+        if(datosUsuario.auto!==undefined)
+        {
+          this.usuario.auto=datosUsuario.auto
+        }
+      })
+      event.target.complete();
+    }, 2000);
+  }
+
   usuario:Usuario={
     email:"",
     password:"",
     nombre:""
   }
-  bandera=true;
+  bandera=false;
   constructor(private router:Router, private storage:UsuarioStorageService, private authFire:AuthService) {
-    this.storage.getSesion().then((sesion)=>{
-      this.usuario=sesion
-      this.bandera=false
-    })
   }
 
+  ionViewDidEnter() {
+    this.storage.getSesion().then((datosUsuario)=>{
+      this.bandera=false
+      this.usuario=datosUsuario
+      if(datosUsuario.auto!==undefined)
+      {
+        this.usuario.auto=datosUsuario.auto
+      }
+    })
+  }
   ngOnInit() {
     
   }
@@ -31,6 +53,7 @@ export class PerfilPage implements OnInit {
     this.bandera=true
     this.storage.logOut()
     this.authFire.logOut()
+    this.bandera=false
     this.router.navigate(["/bienvenida"])
   }
   

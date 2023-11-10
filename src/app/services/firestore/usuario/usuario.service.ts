@@ -22,6 +22,10 @@ export class UsuarioService {
         if (doc !== undefined) {
           let datos = doc.data()
           usuario.nombre = datos["nombre"]
+          if(datos["auto"]!==undefined)
+          {
+            usuario.auto=datos["auto"]
+          }
           resolve(usuario)
         }
         else {
@@ -29,5 +33,11 @@ export class UsuarioService {
         }
       })
     })
+  }
+
+  async addAuto(usuario:Usuario)
+  {
+    usuario.password=""
+    this.authStore.collection(this.path).doc(usuario.email).set(usuario)
   }
 }

@@ -1,6 +1,11 @@
 <app-header titulo="Inicio de sesion" [barraCarga]="bandera"></app-header>
 
 <ion-content class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+<ion-content class="ion-padding">
   <ion-img src="assets/UNIGO.png" style="width: 150px; margin: auto;"></ion-img>
 
   <form [formGroup]="form" (ngSubmit)="login()">

@@ -15,15 +15,25 @@ export class HomePage {
     nombre:"",
     password:""
   }
+  bandera = true
   constructor(private router:Router, private storage:UsuarioStorageService) {
-    const sesion = this.storage.getSesion()
-
-    if(sesion!=undefined)
+    this.storage.getSesion().then((sesion)=>{
+      if(sesion!=undefined)
     {
-      sesion.then((datos)=>{
-        this.usuario=datos
-      })
+        this.usuario=sesion
+        this.bandera=false
     }
+    })
+  }
+  ionViewDidEnter(){
+    this.bandera=true
+    this.storage.getSesion().then((sesion)=>{
+      if(sesion!=undefined)
+    {
+        this.usuario=sesion
+        this.bandera=false
+    }
+    })
   }
   pedir(){
   }

@@ -12,6 +12,18 @@ import { UsuarioService } from 'src/app/services/firestore/usuario/usuario.servi
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
+  handleRefresh(event:any) {
+    setTimeout(() => {
+      
+      this.form = this.formBuilder.group({
+        nombre: ['', [Validators.required]],
+        email: ['', [Validators.email, Validators.required]],
+        password: ['', [Validators.required, Validators.minLength(6)]]
+      })
+      event.target.complete();
+    }, 2000);
+  }
+
   form: FormGroup;
   mensaje_error:string = "";
 
@@ -29,12 +41,12 @@ export class RegisterPage implements OnInit {
     private authStore:UsuarioService
     ) {
       this.form = this.formBuilder.group({
-      nombre: ['', [Validators.required]],
-      email: ['', [Validators.email, Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
-    })
+        nombre: ['', [Validators.required]],
+        email: ['', [Validators.email, Validators.required]],
+        password: ['', [Validators.required, Validators.minLength(6)]]
+      })
   }
-
+  
   ngOnInit() {
   }
 

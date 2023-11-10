@@ -1,6 +1,8 @@
+import { Viaje } from './../../interfaces/viaje';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Usuario } from 'src/app/interfaces/usuario';
 
 @Component({
   selector: 'app-nuevo-viaje',
@@ -10,6 +12,18 @@ import { Router } from '@angular/router';
 export class NuevoViajePage implements OnInit {
   form:FormGroup;
 
+  fecha_viaje:Date = new Date()
+  usuario:Usuario={
+    email:"",
+    password:"",
+    nombre:"",
+  }
+  viaje:Viaje={
+    fecha:this.fecha_viaje,
+    salida:"",
+    destino:"",
+    conductor:this.usuario
+  }
   constructor(
     private formBuilder: FormBuilder,
     private router:Router,
