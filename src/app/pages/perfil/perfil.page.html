@@ -1,51 +1,39 @@
-<app-header titulo="Perfil" inicio="1"></app-header>
+<app-header titulo="Perfil" inicio="1" [barraCarga]="bandera"></app-header>
 
 <ion-content class="ion-padding" >
-  <!-- <ion-item>
-    <ion-label>Nombre Usuario</ion-label>
-    <p>{{usuario.perfil.nombre}}</p>
-  </ion-item>
+  <ion-list>
+    <h4>Informacion Personal:</h4>
 
-  <ion-item>
-    <ion-label>Email</ion-label>
-    <p>{{usuario.email}}</p>
-  </ion-item>
+    <ion-item>
+      <ion-label>
+        <h2>Nombre de usuario:</h2>
+        <p>{{usuario.nombre}}</p>
+      </ion-label>
+    </ion-item>
 
-  <ion-item>
-    <ion-label>Contraseña</ion-label>
-    <p>********</p>
-  </ion-item>
+    <ion-item>
+      <ion-label>
+        <h2>Correo Electronico:</h2>
+        <p>{{usuario.email}}</p>
+      </ion-label>
+    </ion-item>
 
-  <ion-item *ngIf="auto.patente!==''">
-    <ion-label>Patente</ion-label>
-    <p>{{auto.patente}}</p>
-  </ion-item>
+    <ion-item>
+      <ion-label>
+        <h2>Contraseña:</h2>
+        <p>******</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 
-  <ion-item *ngIf="auto.patente!==''">
-    <ion-label>Modelo</ion-label>
-    <p>{{auto.modelo}}</p>
-  </ion-item>
-
-  <ion-item *ngIf="auto.patente!==''">
-    <ion-label>Color</ion-label>
-    <p>{{auto.color}}</p>
-  </ion-item>
-
-  <ion-item *ngIf="auto.patente!==''">
-    <ion-label>Capacidad</ion-label>
-    <p>{{auto.capacidad}}</p>
-  </ion-item> -->
-
-  <!-- <ion-button *ngIf="auto.patente==''" (click)="agregarAuto()" expand="block" shape="round">
-    Agregar Auto
-  </ion-button>
-
-  <ion-button *ngIf="auto.patente!==''" (click)="eliminarAuto()" expand="block" shape="round">
-    Eliminar auto
-  </ion-button>
-
-  <ion-button (click)="modificarDatos()" expand="block" shape="round">
-    Modificar Datos
-<<<<<<< HEAD
-  </ion-button> -->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button>
+      <ion-icon name="chevron-up-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button (click)="logOut()"><ion-icon name="log-out-outline"></ion-icon></ion-fab-button>
+      <ion-fab-button><ion-icon name="create-outline"></ion-icon></ion-fab-button>
+      <ion-fab-button><ion-icon name="car-sport-outline"></ion-icon></ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
 </ion-content>

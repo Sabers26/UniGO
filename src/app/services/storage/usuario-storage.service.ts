@@ -18,4 +18,8 @@ export class UsuarioStorageService {
   {
     return this.storage.get("sesion")
   }
+  async logOut()
+  {
+    this.storage.remove("sesion")
+  }
 }

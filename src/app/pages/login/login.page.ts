@@ -20,7 +20,7 @@ export class LoginPage implements OnInit {
     password:"",
     nombre:"",
   }
-
+  bandera = false
   constructor(
     private formBuilder: FormBuilder,
     private router:Router,
@@ -44,6 +44,7 @@ export class LoginPage implements OnInit {
 
   async login()
   {
+    this.bandera=true
     this.usuario.email = this.form.get("email")?.value;
     this.usuario.password = this.form.get("password")?.value;
 
@@ -56,14 +57,17 @@ export class LoginPage implements OnInit {
     }).catch((error)=>{
       if(error.code==="auth/invalid-login-credentials")
       {
+        this.bandera = false
         this.presentToast("Email y/o contraseña incorrecta")
       }
       if(error.code==="auth/too-many-requests")
       {
+        this.bandera = false
         this.presentToast("Demasiados intentos detectados. La cuenta fue bloqueda")
       }
       if(error.code==="auth/network-request-failed")
       {
+        this.bandera = false
         this.presentToast("Error de conexion...Verifique su conexion a internet")
       }
     })

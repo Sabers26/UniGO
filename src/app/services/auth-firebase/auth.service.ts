@@ -19,4 +19,9 @@ export class AuthService {
   {
     return await this.authFire.signInWithEmailAndPassword(usuario.email,usuario.password)
   }
+
+  async logOut()
+  {
+    await this.authFire.signOut()
+  }
 }

@@ -1,9 +1,10 @@
-<ion-header [translucent]="true" mode="ios">
+<ion-header mode="ios">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button mode="ios" defaultHref="tabs/home" text="Atras" *ngIf="inicio=='1'"></ion-back-button>
     </ion-buttons>
-
     <ion-title>{{titulo}}</ion-title>
+
+    <ion-progress-bar *ngIf="barraCarga==true" type="indeterminate" color="danger"></ion-progress-bar>
   </ion-toolbar>
 </ion-header>

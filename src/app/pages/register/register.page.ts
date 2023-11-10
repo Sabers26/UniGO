@@ -20,7 +20,7 @@ export class RegisterPage implements OnInit {
     nombre:'',
     password:'',
   }
-
+  bandera=false
   constructor(
     private formBuilder: FormBuilder, 
     private router:Router,
@@ -44,6 +44,7 @@ export class RegisterPage implements OnInit {
 
 
   async registrarse(){
+    this.bandera=true
     this.usuario.nombre = this.form.get("nombre")?.value;
     this.usuario.email = this.form.get("email")?.value;
     this.usuario.password = this.form.get("password")?.value;
@@ -54,10 +55,12 @@ export class RegisterPage implements OnInit {
     }).catch((error)=>{
       if(error.code==="auth/email-already-in-use")
       {
+        this.bandera=false
         this.presentToast("El email ingresado ya se encuentra registrado")
       }
       if(error.code==="auth/network-request-failed")
       {
+        this.bandera=false
         this.presentToast("Error de conexion...Verifique su conexion a internet")
       }
     })
