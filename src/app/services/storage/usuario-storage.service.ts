@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { Usuario } from 'src/app/interfaces/usuario';
+import { Viaje } from 'src/app/interfaces/viaje';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +22,10 @@ export class UsuarioStorageService {
   async logOut()
   {
     this.storage.remove("sesion")
+  }
+
+  async addViajeLocal(viaje:Viaje)
+  {
+    await this.storage.set("viaje", viaje)
   }
 }

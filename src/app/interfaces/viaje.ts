@@ -2,8 +2,7 @@
 import { Usuario } from "./usuario";
 
 export interface Viaje {
-    fecha:Date,
-    salida:string,
+    comentarios?:string,
     destino:string,
     conductor:Usuario,
     pasajeros?:Usuario[]

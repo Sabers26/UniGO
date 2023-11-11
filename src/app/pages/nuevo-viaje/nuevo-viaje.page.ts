@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/interfaces/usuario';
+import { UsuarioService } from 'src/app/services/firestore/usuario/usuario.service';
+import { ViajesService } from 'src/app/services/firestore/viajes/viajes.service';
+import { UsuarioStorageService } from 'src/app/services/storage/usuario-storage.service';
 
 @Component({
   selector: 'app-nuevo-viaje',
@@ -12,28 +15,26 @@ import { Usuario } from 'src/app/interfaces/usuario';
 export class NuevoViajePage implements OnInit {
   form:FormGroup;
 
-  fecha_viaje:Date = new Date()
-  hora_salida!:string;
-  
   usuario:Usuario={
     email:"",
     password:"",
     nombre:"",
   }
   viaje:Viaje={
-    fecha:this.fecha_viaje,
-    salida:"",
     destino:"",
     conductor:this.usuario
   }
   constructor(
     private formBuilder: FormBuilder,
     private router:Router,
+    private sotreViajes:ViajesService,
+    private storage:UsuarioStorageService
   ) 
   { 
     this.form = this.formBuilder.group({
       direccion: ['', [Validators.required]],
       costo: ['', [Validators.required]],
+      comentarios:[""]
     });
   }
 
@@ -45,6 +46,15 @@ export class NuevoViajePage implements OnInit {
   }
 
   async agregar(){
+    this.viaje.destino=this.form.get("direccion")?.value;
+    this.viaje.comentarios=this.form.get("comentarios")?.value;
+    this.storage.getSesion().then((datosUsuario)=>{
+      this.viaje.conductor=datosUsuario
+      this.sotreViajes.addViaje(this.viaje).then(()=>{
+        this.storage.addViajeLocal(this.viaje)
+      })
+      this.router.navigate(['/tabs/home'])
+    }) 
     
   }
 

@@ -21,6 +21,10 @@
       <p style="margin-left: 5%; color: #ff0000;">El costo es requerida (maximo 99.999)</p>
     </ion-text>
 
+    <ion-item>
+      <ion-input required labelPlacement="floating" maxlength="50" type="text-area" aria-label="Comentarios" label="Comentarios" name="comentarios" formControlName="comentarios"></ion-input>
+    </ion-item>
+
     <ion-button block color="primary" type="submit" [disabled]="form.invalid" expand="block" shape="round">
       Agregar viaje
     </ion-button>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Usuario } from 'src/app/interfaces/usuario';
+import { Viaje } from 'src/app/interfaces/viaje';
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +40,18 @@ export class UsuarioService {
   {
     usuario.password=""
     this.authStore.collection(this.path).doc(usuario.email).set(usuario)
+  }
+  async getAuto(usuario:Usuario):Promise<Usuario>
+  {
+    return new Promise((resolve, reject) => {
+      this.authStore.collection(this.path).doc(usuario.email).get().subscribe((doc:any)=>{
+      if(doc!==undefined)
+      {
+        let datos = doc.data()
+        usuario.auto=datos["auto"]
+        resolve(usuario)
+      }
+      reject("No se encontro auto asociado al usuario")
+    })})
   }
 }
