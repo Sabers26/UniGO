@@ -1,0 +1,27 @@
+<app-header titulo="Inicio de sesion" inicio="1" [barraCarga]="bandera"></app-header>
+
+<ion-content class="ion-padding">
+  <ion-img src="assets/UNIGO.png" style="width: 150px; margin: auto;"></ion-img>
+
+  <form [formGroup]="form" (ngSubmit)="mod()">
+    <ion-item>
+        <ion-input required labelPlacement="floating" type="text" aria-label="Nombre" label="nombre" name="nombre" formControlName="nombre"></ion-input>
+    </ion-item>
+
+    <ion-text *ngIf="form.get('nombre')?.errors?.['required'] && form.get('nombre')?.touched">
+      <p style="margin-left: 5%; color: #ff0000;">Debe ingresar un Email</p>
+    </ion-text>
+
+    <ion-item>
+        <ion-input required labelPlacement="floating" type="password" aria-label="Contraseña" label="Contraseña" name="password" formControlName="password"></ion-input>
+    </ion-item>
+
+    <ion-text *ngIf="form.get('password')?.errors?.['required'] && form.get('password')?.touched">
+      <p style="margin-left: 5%; color: #ff0000;">Debe ingresar su contraseña</p>
+    </ion-text>
+
+    <ion-button block color="primary" type="submit" expand="block" shape="round" id="open-action-sheet" [disabled]="form.invalid">enviar</ion-button>
+    <ion-action-sheet mode="ios" trigger="open-action-sheet" header="Confirmacion" [buttons]="actionSheetButtons"></ion-action-sheet>
+
+  </form>
+</ion-content>
