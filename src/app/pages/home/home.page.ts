@@ -10,6 +10,9 @@ import { UsuarioStorageService } from 'src/app/services/storage/usuario-storage.
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+
+  public loaded = false;
+
   usuario:Usuario={
     email:"",
     nombre:"",
@@ -37,4 +40,6 @@ export class HomePage {
   }
   pedir(){
   }
+
+
 }
