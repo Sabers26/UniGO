@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { AuthService } from 'src/app/services/auth-firebase/auth.service';
 
@@ -25,7 +26,8 @@ export class RecuperarPage implements OnInit {
   (
     private formBuilder: FormBuilder,
     private router:Router,
-    private authFire:AuthService
+    private authFire:AuthService,
+    private toastController:ToastController
   ) 
   { 
     this.form = this.formBuilder.group({
@@ -38,7 +40,21 @@ export class RecuperarPage implements OnInit {
 
   onSubmit(){
     this.bandera = true
-    this.authFire.recuperar(this.usuario)
+    this.usuario.email=this.form.get("email")?.value;
+    this.authFire.recuperar(this.usuario).then(()=>{
+      this.bandera=false
+      
+    })
   }
 
+  async presentToast(mensaje:string)
+  {
+    let toast = await this.toastController.create({
+      message:mensaje,
+      duration:1500,
+      position:"top"
+    })
+
+    await toast.present()
+  }
 }
