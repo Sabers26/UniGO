@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { Viaje } from 'src/app/interfaces/viaje';
 
@@ -54,4 +55,15 @@ export class UsuarioService {
       reject("No se encontro auto asociado al usuario")
     })})
   }
+
+  updateUser(usuario:Usuario, newData: any): Promise<void> {
+    const userRef = this.authStore.collection(this.path).doc(usuario.email);
+
+    return userRef.update(newData);
+  }
+
+  getUser(usuario:Usuario): Observable<any> {
+    return this.authStore.collection(this.path).doc(usuario.email).valueChanges();
+  }
+
 }

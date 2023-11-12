@@ -29,6 +29,10 @@ const routes: Routes = [
         path: 'nuevo-viaje',
         loadChildren: () => import('../nuevo-viaje/nuevo-viaje.module').then( m => m.NuevoViajePageModule),
       },
+      {
+        path: 'modificar',
+        loadChildren: () => import('../modificar/modificar.module').then( m => m.ModificarPageModule),
+      },
     ]
   }
 ];
