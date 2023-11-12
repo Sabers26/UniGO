@@ -33,6 +33,10 @@ const routes: Routes = [
         path: 'modificar',
         loadChildren: () => import('../modificar/modificar.module').then( m => m.ModificarPageModule),
       },
+      {
+        path: 'confirmar-viaje',
+        loadChildren: () => import('../confirmar-viaje/confirmar-viaje.module').then( m => m.ConfirmarViajePageModule)
+      },
     ]
   }
 ];

@@ -1,0 +1,56 @@
+<app-header titulo="Confirmar viaje" inicio="1" [barraCarga]="bandera"></app-header>
+
+<ion-content class="ion-padding">
+  <ion-img src="assets/UNIGO.png" style="width: 50px; float: left;"></ion-img>
+  <ion-text color="dark" style="text-align: center;">
+    <p style="margin-right: 20%;">UniGO</p><p style="margin-right: 20%;"> {{usuario.nombre}}</p>
+  </ion-text>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>{{viaje.destino}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{viaje.fecha_viaje}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{viaje.hora_salida}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{viaje.comentarios}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{viaje.conductor.nombre}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{viaje.costo}}</ion-label>
+    </ion-item>
+
+    <ion-list [inset]="true">
+      <ion-item>
+        <ion-label>
+          <h2>Destino del viaje:</h2>
+          <p>{{viaje.destino}}</p>
+        </ion-label>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>
+          <h2>Fecha del viaje:</h2>
+          <p>{{viaje.fecha_viaje}}</p>
+        </ion-label>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>
+          <h2>Hora del viaje:</h2>
+          <p>{{viaje.hora_salida}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    
+  </ion-list>
+  <ion-button block color="primary" type="submit" expand="block" shape="round" (click)="confirmar()">
+    Confirmar viaje
+  </ion-button>
+</ion-content>

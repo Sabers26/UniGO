@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { Viaje } from 'src/app/interfaces/viaje';
 import { ViajesService } from 'src/app/services/firestore/viajes/viajes.service';
@@ -27,9 +27,12 @@ export class HomePage {
     {
         this.usuario=sesion
         this.bandera=false
+        
     }
     this.storeViaje.getAllViajes().then((viajes)=>{
+      
       this.viajes=viajes
+      this.loaded = true;
     })
     })
   }
@@ -43,7 +46,14 @@ export class HomePage {
     }
     })
   }
-  pedir(){
+  pedir(viaje:Viaje){
+    let datos:NavigationExtras={
+      state:{
+         datos:viaje
+        }
+    }
+    
+    this.router.navigate(["/tabs/confirmar-viaje"], datos)
   }
 
 
