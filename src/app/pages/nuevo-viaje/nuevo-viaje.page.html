@@ -1,8 +1,15 @@
-<app-header titulo="Nuevo viaje" inicio="1"></app-header>
+<app-header titulo="Nuevo viaje" inicio="1" [barraCarga]="bandera"></app-header>
 
 <ion-content class="ion-padding">
   <ion-img src="assets/UNIGO.png" style="width: 50px; "></ion-img>
   UniGO
+
+  <ion-item>
+    <ion-select label="Hora Salida" placeholder="Hora" [(ngModel)]="viaje.hora_salida">
+      <ion-select-option *ngFor="let hora of listaHoras" value="{{hora}}:00">{{hora}}:00</ion-select-option>
+    </ion-select>
+  </ion-item>
+
   <form [formGroup]="form" (ngSubmit)="agregar()">
 
     <ion-item>

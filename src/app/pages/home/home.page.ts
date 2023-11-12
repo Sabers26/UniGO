@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 import { Usuario } from 'src/app/interfaces/usuario';
+import { Viaje } from 'src/app/interfaces/viaje';
+import { ViajesService } from 'src/app/services/firestore/viajes/viajes.service';
 import { UsuarioStorageService } from 'src/app/services/storage/usuario-storage.service';
 
 @Component({
@@ -11,7 +13,8 @@ import { UsuarioStorageService } from 'src/app/services/storage/usuario-storage.
 })
 export class HomePage {
 
-  public loaded = false;
+  viajes:Viaje[]=[]
+  loaded = false;
 
   usuario:Usuario={
     email:"",
@@ -19,13 +22,17 @@ export class HomePage {
     password:""
   }
   bandera = true
-  constructor(private router:Router, private storage:UsuarioStorageService) {
+  constructor(private router:Router, private storage:UsuarioStorageService, private storeViaje:ViajesService) {
     this.storage.getSesion().then((sesion)=>{
-      if(sesion!=undefined)
+    if(sesion!=undefined)
     {
         this.usuario=sesion
         this.bandera=false
     }
+    this.storeViaje.getAllViajes().then((viajes)=>{
+      this.viajes=viajes
+      console.log(viajes)
+    })
     })
   }
   ionViewDidEnter(){
