@@ -1,5 +1,5 @@
 # UniGO
-- Falta reparar el home — Erwin
+- Falta reparar el home — Erwin (LISTO)
 - Falta re hacer el formulario de viajes — Luis (LISTO)
 - Falta formulario recuperacion de password — Erwin (LISTO)
 - Falta formulario de modificacion de datos — Erwin (revisar con el profesor por el error del formulario)
