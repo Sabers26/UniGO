@@ -22,10 +22,21 @@ export class UsuarioStorageService {
   async logOut()
   {
     this.storage.remove("sesion")
+    this.storage.remove("conexion")
   }
 
   async addViajeLocal(viaje:Viaje)
   {
     await this.storage.set("viaje", viaje)
+  }
+
+  async addConexion(id:number)
+  {
+    return await this.storage.set("conexion", id)
+  }
+
+  async getConexion():Promise<number>
+  {
+    return await this.storage.get("conexion")
   }
 }

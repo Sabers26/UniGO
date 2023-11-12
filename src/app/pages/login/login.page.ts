@@ -62,6 +62,7 @@ export class LoginPage implements OnInit {
       this.fireStore.obtenerUsuario(this.usuario).then((datosUsuario)=>{
         this.usuario=datosUsuario
         this.storage.login(this.usuario)
+        this.storage.addConexion(1)
         this.router.navigate(["/tabs/home"])
       })
     }).catch((error)=>{
