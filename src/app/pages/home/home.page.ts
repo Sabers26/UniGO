@@ -49,7 +49,7 @@ export class HomePage {
   pedir(viaje:Viaje){
     let datos:NavigationExtras={
       state:{
-         datos:viaje
+          datos:viaje
         }
     }
     

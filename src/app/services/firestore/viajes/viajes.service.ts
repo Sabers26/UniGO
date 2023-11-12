@@ -38,18 +38,18 @@ export class ViajesService {
         nombre:"",
         password:""
       }
-      let viaje:Viaje={
-        fecha_viaje:"",
-        hora_salida:"",
-        conductor:conductor,
-        destino:"",
-        costo:0,
-        pasajeros:[]
-      }
       let viajes:Viaje[]=[]
 
       this.fireStore.collection(this.pathViajes).get().subscribe((docs)=>{
       docs.forEach((item)=>{
+        let viaje:Viaje={
+          fecha_viaje:"",
+          hora_salida:"",
+          conductor:conductor,
+          destino:"",
+          costo:0,
+          pasajeros:[]
+        }
         let datos:any=item.data()
         let auto:Auto=datos['conductor']['auto']
         if(auto.capacidad>0){
@@ -61,6 +61,7 @@ export class ViajesService {
           viajes.push(viaje)
         }
       })
+      console.log(viajes)
       resolve(viajes)
     })
     })

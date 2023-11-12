@@ -14,14 +14,6 @@ export class PerfilPage implements OnInit {
 
   handleRefresh(event:any) {
     setTimeout(() => {
-      this.storage.getSesion().then((datosUsuario)=>{
-        this.bandera=false
-        this.usuario=datosUsuario
-        if(datosUsuario.auto!==undefined)
-        {
-          this.usuario.auto=datosUsuario.auto
-        }
-      })
       event.target.complete();
     }, 2000);
   }
