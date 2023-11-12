@@ -69,7 +69,7 @@
     <ion-fab-list side="top">
       <ion-fab-button (click)="logOut()"><ion-icon name="log-out-outline"></ion-icon></ion-fab-button>
       <ion-fab-button routerLink="/tabs/modificar"><ion-icon name="create-outline"></ion-icon></ion-fab-button>
-      <ion-fab-button routerLink="/tabs/nuevo-auto"><ion-icon name="car-sport-outline"></ion-icon></ion-fab-button>
+      <ion-fab-button routerLink="/tabs/nuevo-auto" *ngIf="usuario.auto==undefined"><ion-icon name="car-sport-outline"></ion-icon></ion-fab-button>
     </ion-fab-list>
   </ion-fab>
 </ion-content>

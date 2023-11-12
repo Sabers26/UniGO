@@ -8,6 +8,8 @@
     <h1>Viajes disponibles</h1>
     <h2>-----------------------------------------</h2>
   </ion-text>
+  <p *ngFor="let viaje of viajes">{{viaje.destino}}</p>
+  
   <ion-list *ngIf="loaded">
     <ion-list-header>Viajes</ion-list-header>
     <ion-item>

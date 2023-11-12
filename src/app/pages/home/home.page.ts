@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Storage } from '@ionic/storage-angular';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { Viaje } from 'src/app/interfaces/viaje';
 import { ViajesService } from 'src/app/services/firestore/viajes/viajes.service';
@@ -31,7 +30,6 @@ export class HomePage {
     }
     this.storeViaje.getAllViajes().then((viajes)=>{
       this.viajes=viajes
-      console.log(viajes)
     })
     })
   }

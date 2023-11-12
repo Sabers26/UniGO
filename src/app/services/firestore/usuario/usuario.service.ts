@@ -62,8 +62,4 @@ export class UsuarioService {
     return userRef.update(newData);
   }
 
-  getUser(usuario:Usuario): Observable<any> {
-    return this.authStore.collection(this.path).doc(usuario.email).valueChanges();
-  }
-
 }
