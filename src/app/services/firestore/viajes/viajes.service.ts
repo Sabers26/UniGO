@@ -66,4 +66,8 @@ export class ViajesService {
     })
     })
   }
+  // async getViajeConductor(conductor:Usuario)
+  // {
+  //   return await this.fireStore.collection(this.pathViajes).get(conductor.auto?.patente).subscribe(())
+  // }
 }

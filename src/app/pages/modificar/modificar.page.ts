@@ -45,18 +45,22 @@ export class ModificarPage implements OnInit {
   }
 
   mod() {
-    let password=this.form.get("password")?.value;
-    if(this.nombre_nuevo!=="")
+    if(this.form!==undefined)
     {
-      this.usuario.nombre=this.nombre_nuevo
+      let password=this.form.get("password")?.value;
+      if(this.nombre_nuevo!=="")
+      {
+        this.usuario.nombre=this.nombre_nuevo
+      }
+      if(this.usuario.password!==password)
+      {
+        this.usuario.password=password
+      }
+      this.store.addUsuario(this.usuario).then(()=>{
+        this.storage.login(this.usuario)
+      })
     }
-    if(this.usuario.password!==password)
-    {
-      this.usuario.password=password
-    }
-    this.store.addUsuario(this.usuario).then(()=>{
-      this.storage.login(this.usuario)
-    })
+    
   }
 
   get errorControl() {
@@ -79,7 +83,7 @@ export class ModificarPage implements OnInit {
     {
       text: 'Confirmar',
       data: {
-        action: this.mod(),
+        action: this,
 
       },
     },
