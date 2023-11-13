@@ -27,17 +27,29 @@ export class BienvenidaPage implements OnInit {
     this.bandera=true
     let usuario:Usuario
     await this.storage.getSesion().then((sesion)=>{
-      if(sesion!==undefined)
+      if(sesion!==null)
       {
         usuario=sesion
         this.authFire.login(usuario).then(()=>{
           this.storage.addConexion(1)
-          this.router.navigate(["/tabs/viajes"])
+          this.storage.getViajeLocal().then((viaje)=>{
+            if(viaje!==undefined)
+            {
+              this.router.navigate(["/tabs/viajes"])
+            }
+          })
+          this.router.navigate(["/tabs/home"])
         }).catch((error)=>{
           if(error.code==="auth/network-request-failed")
           {
             this.storage.addConexion(2)
-            this.router.navigate(["/tabs/viajes"])
+            this.storage.getViajeLocal().then((viaje)=>{
+              if(viaje!==undefined)
+              {
+                this.router.navigate(["/tabs/viajes"])
+              }
+            })
+            this.router.navigate(["/tabs/home"])
           }
         })
       }

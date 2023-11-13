@@ -8,5 +8,6 @@ export interface Viaje {
     conductor:Usuario,
     comentarios?:string,
     costo:number,
-    pasajeros?:Usuario[]
+    pasajeros?:Usuario[],
+    estado?:string
 }

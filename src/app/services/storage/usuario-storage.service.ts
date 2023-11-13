@@ -30,6 +30,21 @@ export class UsuarioStorageService {
     await this.storage.set("viaje", viaje)
   }
 
+  async getViajeLocal():Promise<Viaje>
+  {
+    return await this.storage.get("viaje")
+  }
+
+  async eliminarPasajero(viaje:Viaje)
+  {
+    await this.storage.set("viaje", viaje)
+  }
+
+  async anularViaje()
+  {
+    await this.storage.remove("viaje")
+  }
+
   async addConexion(id:number)
   {
     return await this.storage.set("conexion", id)

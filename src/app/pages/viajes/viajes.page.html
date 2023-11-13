@@ -1,6 +1,7 @@
 <app-header titulo="Nuevo auto" inicio="1"></app-header>
 
-<ion-content class="ion-padding">
+<!-- DATOS QUE SE MOSTRARAN SI NO TIENES VIAJES -->
+<ion-content class="ion-padding" *ngIf="viaje.fecha_viaje==''">
   <ion-img src="assets/UNIGO.png" style="width: 50px; float: left;"></ion-img>
   <ion-text color="dark" style="text-align: center;">
     <!-- <p style="margin-right: 20%;">UniGO</p><p style="margin-right: 20%;">¡Hola! {{usuario.nombre}}</p> -->
@@ -13,5 +14,12 @@
   <ion-button (click)="agregar()" expand="block" shape="round">
     Agregar un viaje
   </ion-button>
-
 </ion-content>
+
+
+<!-- INFORMACION DEL CONDUCTOR -->
+<ion-content>
+  
+</ion-content>
+<!-- INFORMACION DEL PASAJERO -->
+

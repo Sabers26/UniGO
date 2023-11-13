@@ -6,6 +6,7 @@ import { ToastController } from '@ionic/angular';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { AuthService } from 'src/app/services/auth-firebase/auth.service';
 import { UsuarioService } from 'src/app/services/firestore/usuario/usuario.service';
+import { ViajesService } from 'src/app/services/firestore/viajes/viajes.service';
 
 @Component({
   selector: 'app-login',
@@ -36,6 +37,7 @@ export class LoginPage implements OnInit {
     private router:Router,
     private storage:UsuarioStorageService,
     private fireStore:UsuarioService,
+    private storeViaje:ViajesService,
     private authFire:AuthService,
     private toastController:ToastController,
     ) { 
@@ -63,6 +65,13 @@ export class LoginPage implements OnInit {
         this.usuario=datosUsuario
         this.storage.login(this.usuario)
         this.storage.addConexion(1)
+        this.storeViaje.obtenerViaje(this.usuario).then((viaje)=>{
+          if(viaje!==undefined)
+          {
+            this.storage.addViajeLocal(viaje)
+            this.router.navigate(["/tabs/viajes"])
+          }
+        })
         this.router.navigate(["/tabs/home"])
       })
     }).catch((error)=>{
@@ -79,7 +88,18 @@ export class LoginPage implements OnInit {
       if(error.code==="auth/network-request-failed")
       {
         this.bandera = false
-        this.presentToast("Error de conexion...Verifique su conexion a internet")
+        this.storage.login(this.usuario)
+        this.storage.addConexion(2)
+        this.storage.getViajeLocal().then((viaje)=>{
+          if(viaje!==undefined)
+          {
+            this.router.navigate(["/tabs/viajes"])
+          }
+          else
+          {
+            this.router.navigate(["/tabs/home"])
+          }
+        })
       }
     })
   }

@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { TabsPage } from './tabs.page';
 import { ConexionGuard } from 'src/app/guards/conexion.guard';
 import { NoConexionGuard } from 'src/app/guards/no-conexion.guard';
+import { ViajesGuard } from 'src/app/guards/viajes.guard';
 
 
 const routes: Routes = [
@@ -14,7 +15,7 @@ const routes: Routes = [
       {
         path: 'home',
         loadChildren: () => import('../home/home.module').then( m => m.HomePageModule),
-        canActivate:[ConexionGuard]
+        canActivate:[ConexionGuard, ViajesGuard]
       },
       {
         path: 'perfil',
