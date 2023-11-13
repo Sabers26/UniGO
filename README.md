@@ -6,3 +6,4 @@
 - Falta validacion de paginas de viajes — Luis (LISTO)
 - Faltan guards — Luis (LISTO)
 - faltan los avisos de confirmacion — Erwin (por implementar en paginas restantes)
+- Falta arreglar la pantalla de viajes - Erwin (por terminar)
