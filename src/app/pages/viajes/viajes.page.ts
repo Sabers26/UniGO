@@ -13,7 +13,7 @@ import { UsuarioStorageService } from 'src/app/services/storage/usuario-storage.
 })
 export class ViajesPage implements OnInit {
   bandera:boolean=false
-  bandera_viaje:boolean=false
+  bandera_viaje:number=0
 
   conductor:Usuario={
     email:"",
@@ -33,7 +33,12 @@ export class ViajesPage implements OnInit {
     conductor:this.conductor,
     costo:0
   }
-  constructor(private router:Router, private storage:UsuarioStorageService, private toastController:ToastController) { }
+  constructor(
+    private router:Router, 
+    private storage:UsuarioStorageService, 
+    private toastController:ToastController, 
+    private store:ViajesService,
+    ) { }
 
   ngOnInit() {
     this.bandera=true
@@ -45,7 +50,10 @@ export class ViajesPage implements OnInit {
           this.viaje=viaje
           if(this.viaje.conductor==this.usuario)
           {
-            this.bandera_viaje=true
+            this.bandera_viaje=1
+          }
+          else{
+            this.bandera_viaje=2
           }
         }
       })
@@ -54,7 +62,7 @@ export class ViajesPage implements OnInit {
   }
 
   agregar(){
-    if(this.conductor.auto!==undefined)
+    if(this.usuario.auto!==undefined)
     {
       this.router.navigate(['/tabs/nuevo-viaje'])
     }
@@ -74,4 +82,52 @@ export class ViajesPage implements OnInit {
 
     await toast.present()
   }
+
+  anular(){
+    this.store.anularViaje(this.viaje).then(()=>{
+      this.storage.anularViaje().then(()=>{
+        this.router.navigate(['/tabs/home'])
+      })
+    })
+  }
+
+  cancelar(){
+    this.store.anularViaje(this.viaje).then(()=>{
+      this.storage.anularViaje().then(()=>{
+        this.router.navigate(['/tabs/home'])
+      })
+    })
+  }
+
+  anularviaje = [
+    {
+      text: 'Confirmar',
+      data: {
+        action: this.anular(),
+      },
+    },
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      data: {
+        action: 'cancel',
+      },
+    },
+  ];
+
+  cancelarviaje = [
+    {
+      text: 'Confirmar',
+      data: {
+        action: this.cancelar(),
+      },
+    },
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      data: {
+        action: 'cancel',
+      },
+    },
+  ];
 }

@@ -83,8 +83,7 @@ export class ModificarPage implements OnInit {
     {
       text: 'Confirmar',
       data: {
-        action: this,
-
+        action: this.mod(),
       },
     },
     {
@@ -95,5 +94,4 @@ export class ModificarPage implements OnInit {
       },
     },
   ];
-
 }
