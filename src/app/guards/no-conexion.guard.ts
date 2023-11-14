@@ -14,7 +14,8 @@ export class NoConexionGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.getAcceso();
+    //return this.getAcceso();
+    return true
   }
   
   async getAcceso()

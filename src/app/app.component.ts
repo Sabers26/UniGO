@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { UsuarioService } from './services/firestore/usuario/usuario.service';
 import { Storage } from '@ionic/storage-angular';
 import { ViajesService } from './services/firestore/viajes/viajes.service';
+import { UsuarioStorageService } from './services/storage/usuario-storage.service';
 
 @Component({
   selector: 'app-root',

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { Storage } from '@ionic/storage-angular';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { Viaje } from 'src/app/interfaces/viaje';
 import { ViajesService } from 'src/app/services/firestore/viajes/viajes.service';
@@ -12,8 +13,13 @@ import { UsuarioStorageService } from 'src/app/services/storage/usuario-storage.
   styleUrls: ['./viajes.page.scss'],
 })
 export class ViajesPage implements OnInit {
+  handleRefresh(event:any) {
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
+  }
+
   bandera:boolean=false
-  bandera_viaje:number=0
 
   conductor:Usuario={
     email:"",
@@ -35,30 +41,22 @@ export class ViajesPage implements OnInit {
   }
   constructor(
     private router:Router, 
-    private storage:UsuarioStorageService, 
+    private storage:Storage, 
     private toastController:ToastController, 
     private store:ViajesService,
     ) { }
 
-  ngOnInit() {
+  async ionViewDidEnter(){
     this.bandera=true
-    this.storage.getSesion().then((sesion)=>{
-      this.usuario=sesion
-      this.storage.getViajeLocal().then((viaje)=>{
-        if(viaje!==null)
-        {
-          this.viaje=viaje
-          if(this.viaje.conductor==this.usuario)
-          {
-            this.bandera_viaje=1
-          }
-          else{
-            this.bandera_viaje=2
-          }
-        }
-      })
-    })
-    
+    let sesion = await this.storage.get("sesion")
+    this.usuario=sesion
+    let v=await this.storage.get("viaje")
+    if(v!==null)
+    {
+      this.viaje=v
+    }
+  }
+  ngOnInit() {
   }
 
   agregar(){
@@ -85,21 +83,19 @@ export class ViajesPage implements OnInit {
 
   anular(){
     this.store.anularViaje(this.viaje).then(()=>{
-      this.storage.anularViaje().then(()=>{
-        this.router.navigate(['/tabs/home'])
-      })
+      this.storage.remove("viaje")
+      this.router.navigate(["/tabs/home"])
     })
   }
 
   cancelar(){
     this.store.anularViaje(this.viaje).then(()=>{
-      this.storage.anularViaje().then(()=>{
-        this.router.navigate(['/tabs/home'])
-      })
+      this.storage.remove("viaje")
+      this.router.navigate(["/tabs/home"])
     })
   }
 
-  anularviaje = [
+  /* anularviaje = [
     {
       text: 'Confirmar',
       data: {
@@ -129,5 +125,5 @@ export class ViajesPage implements OnInit {
         action: 'cancel',
       },
     },
-  ];
+  ]; */
 }

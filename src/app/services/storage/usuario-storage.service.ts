@@ -23,10 +23,12 @@ export class UsuarioStorageService {
   {
     this.storage.remove("sesion")
     this.storage.remove("conexion")
+    this.storage.remove("viaje")
   }
 
   async addViajeLocal(viaje:Viaje)
   {
+    console.log(viaje)
     await this.storage.set("viaje", viaje)
   }
 

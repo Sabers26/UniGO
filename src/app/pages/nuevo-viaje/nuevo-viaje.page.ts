@@ -12,6 +12,9 @@ import { UsuarioStorageService } from 'src/app/services/storage/usuario-storage.
   styleUrls: ['./nuevo-viaje.page.scss'],
 })
 export class NuevoViajePage implements OnInit {
+
+  
+
   form:FormGroup;
   bandera = false
   fecha_sistema=new Date()
@@ -53,13 +56,14 @@ export class NuevoViajePage implements OnInit {
 
   cargarHoras()
   {
-    for (let index = 1; index < 22; index++) {
-      if(this.hora_sistema+index>22)
+    for (let index = 1; index < 24; index++) {
+      if(this.hora_sistema+index>24)
       {
         break
       }
       this.listaHoras.push(this.hora_sistema+index)
     }
+    console.log(this.listaHoras)
   }
 
   get errorControl(){
@@ -74,9 +78,11 @@ export class NuevoViajePage implements OnInit {
     this.storage.getSesion().then((datosUsuario)=>{
       this.viaje.conductor=datosUsuario
       this.storeViaje.addViaje(this.viaje).then(()=>{
+        console.log("Pase el add viaje del store")
         this.storage.addViajeLocal(this.viaje)
+        console.log("pase el viaje del storage")
         this.bandera=false
-        this.router.navigate(['/tabs/home'])
+        this.router.navigate(['/tabs/viajes'])
       })
     }) 
     

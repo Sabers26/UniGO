@@ -30,7 +30,6 @@ export class HomePage {
         
     }
     this.storeViaje.getAllViajes().then((viajes)=>{
-      
       this.viajes=viajes
       this.loaded = true;
     })

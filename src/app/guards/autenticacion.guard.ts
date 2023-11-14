@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UsuarioStorageService } from '../services/storage/usuario-storage.service';
+import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AutenticacionGuard implements CanActivate {
-  constructor(private storage:UsuarioStorageService)
+  constructor(private storage:Storage)
   {
 
   }
@@ -19,17 +20,11 @@ export class AutenticacionGuard implements CanActivate {
   
   async getAcceso()
   {
-    let bandera!:boolean
-    await this.storage.getSesion().then((sesion)=>{
-      if(sesion!==undefined)
-      {
-        bandera=false
-      }
-      else
-      {
-        bandera=true
-      }
-    })
-    return bandera
+    let sesion=await this.storage.get("sesion")
+    if(sesion!==undefined)
+    {
+      return true
+    }
+    return false
   }
 }
