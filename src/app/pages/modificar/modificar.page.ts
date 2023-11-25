@@ -79,11 +79,18 @@ export class ModificarPage implements OnInit {
 
   // confimacion
 
-  actionSheetButtons = [
+  public actionSheetButtons = [
     {
-      text: 'Confirmar',
+      text: 'Delete',
+      role: 'destructive',
       data: {
-        action: this.mod(),
+        action: 'delete',
+      },
+    },
+    {
+      text: 'Share',
+      data: {
+        action: this.mod,
       },
     },
     {

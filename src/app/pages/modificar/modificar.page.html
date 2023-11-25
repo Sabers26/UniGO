@@ -20,8 +20,15 @@
       <p style="margin-left: 5%; color: #ff0000;">La contraseña debe tener minimo 6 caracteres</p>
     </ion-text>
 
-    <ion-button block color="primary" type="submit" expand="block" shape="round" id="open-action-sheet" [disabled]="form.invalid">enviar</ion-button>
-    <ion-action-sheet mode="ios" trigger="open-action-sheet" header="Confirmacion" [buttons]="actionSheetButtons"></ion-action-sheet>
+    <ion-button block color="primary" type="submit" expand="block" shape="round" id="open-action-sheet" [disabled]="form.invalid">Enviar</ion-button>
+    <ion-action-sheet
+      mode="ios"
+      trigger="open-action-sheet"
+      class="my-custom-class"
+      header="Example header"
+      subHeader="Example subheader"
+      [buttons]="actionSheetButtons"
+    ></ion-action-sheet>
 
   </form>
 </ion-content>

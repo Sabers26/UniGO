@@ -24,3 +24,14 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+ion-action-sheet.my-custom-class {
+    --background: #000000;
+    --backdrop-opacity: 0.6;
+    --button-background-selected: #e92323;
+    --button-color: #000000;
+    --color: #fff;
+    /* role: "destructive" button iOS styling override */
+    --ion-color-danger: #000000;
+    color: white;
+  }
