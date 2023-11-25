@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { Usuario } from 'src/app/interfaces/usuario';
+import { AuthService } from 'src/app/services/auth-firebase/auth.service';
 import { UsuarioService } from 'src/app/services/firestore/usuario/usuario.service';
 import { UsuarioStorageService } from 'src/app/services/storage/usuario-storage.service';
 
@@ -21,14 +22,14 @@ export class ModificarPage implements OnInit {
   form: FormGroup
 
   bandera = false
-  nombre_nuevo:string=""
   constructor
     (
       private router: Router,
       private formBuilder: FormBuilder,
       private toastController: ToastController,
       private storage:UsuarioStorageService,
-      private store:UsuarioService
+      private store:UsuarioService,
+      private auth:AuthService
     ) {
     this.form = this.formBuilder.group({
       password:["", [Validators.minLength(6)]]
@@ -44,21 +45,18 @@ export class ModificarPage implements OnInit {
   ngOnInit() {
   }
 
-  mod() {
-    console.log("hola")
+  async mod() {
+    console.log(this.usuario.nombre)
     if(this.form!==undefined)
     {
       let password=this.form.get("password")?.value;
-      if(this.nombre_nuevo!=="")
-      {
-        this.usuario.nombre=this.nombre_nuevo
-      }
       if(this.usuario.password!==password)
       {
         this.usuario.password=password
+        console.log(this.usuario)
       }
-      this.store.addUsuario(this.usuario).then(()=>{
-        console.log("Estoy pasando el storage")
+      await this.auth.cambiarPassword(this.usuario)
+      await this.store.addUsuario(this.usuario).then(()=>{
         this.storage.login(this.usuario)
       })
     }

@@ -3,10 +3,12 @@
 <ion-content class="ion-padding">
   <ion-img src="assets/UNIGO.png" style="width: 150px; margin: auto;"></ion-img>
 
+  <ion-item>
+    <ion-input required labelPlacement="floating" type="text" aria-label="Nombre" label="nombre" name="nombre" [(ngModel)]="this.usuario.nombre"></ion-input>
+  </ion-item> 
+
   <form [formGroup]="form" (ngSubmit)="mod()">
-    <ion-item>
-        <ion-input required labelPlacement="floating" type="text" aria-label="Nombre" label="nombre" name="nombre" ></ion-input>
-    </ion-item>
+    
 
     <ion-item>
         <ion-input required labelPlacement="floating" type="password" aria-label="Contraseña actual o nueva" label="Contraseña actual o nueva" name="password" formControlName="password"></ion-input>

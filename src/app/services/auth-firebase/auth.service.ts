@@ -29,5 +29,8 @@ export class AuthService {
     return await this.authFire.sendPasswordResetEmail(usuario.email)
   }
 
-
+  async cambiarPassword(usuario:Usuario){
+    const user =await this.authFire.currentUser
+    user?.updatePassword(usuario.password)
+  }
 }
