@@ -45,6 +45,7 @@ export class ModificarPage implements OnInit {
   }
 
   mod() {
+    console.log("hola")
     if(this.form!==undefined)
     {
       let password=this.form.get("password")?.value;
@@ -57,6 +58,7 @@ export class ModificarPage implements OnInit {
         this.usuario.password=password
       }
       this.store.addUsuario(this.usuario).then(()=>{
+        console.log("Estoy pasando el storage")
         this.storage.login(this.usuario)
       })
     }
