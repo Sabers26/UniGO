@@ -83,13 +83,6 @@ export class ModificarPage implements OnInit {
 
   public actionSheetButtons = [
     {
-      text: 'Delete',
-      role: 'destructive',
-      data: {
-        action: 'delete',
-      },
-    },
-    {
       text: 'Share',
       data: {
         action: this.mod,
