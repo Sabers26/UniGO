@@ -59,6 +59,7 @@ export class ModificarPage implements OnInit {
       await this.store.addUsuario(this.usuario).then(()=>{
         this.storage.login(this.usuario)
       })
+      this.router.navigate(["/tabs/home"])
     }
     
   }
@@ -79,18 +80,12 @@ export class ModificarPage implements OnInit {
 
   // confimacion
 
-  public actionSheetButtons = [
+  actionSheetButtons = [
     {
-      text: 'Share',
+      text: 'Confirmar',
+      role: this.mod,
       data: {
-        action: this.mod,
-      },
-    },
-    {
-      text: 'Cancel',
-      role: 'cancel',
-      data: {
-        action: 'cancel',
+        action: 'confirmar',
       },
     },
   ];

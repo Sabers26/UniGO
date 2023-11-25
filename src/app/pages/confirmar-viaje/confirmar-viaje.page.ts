@@ -65,4 +65,14 @@ export class ConfirmarViajePage implements OnInit {
     })
   }
 
+  actionSheetButtons = [
+    {
+      text: 'Confirmar',
+      role: this.confirmar,
+      data: {
+        action: 'confirmar',
+      },
+    },
+  ];
+
 }

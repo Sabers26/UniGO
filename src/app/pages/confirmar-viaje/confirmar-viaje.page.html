@@ -51,7 +51,13 @@
     </ion-item>
   </ion-list>
 
-  <ion-button block color="primary" type="submit" expand="block" shape="round" (click)="confirmar()">
-    Confirmar viaje
-  </ion-button>
+  <ion-button block color="primary" type="submit" expand="block" shape="round" id="open-action-sheet" (click)="confirmar()">Confirmar viaje</ion-button>
+  <ion-action-sheet
+    mode="ios"
+    trigger="open-action-sheet"
+    class="my-custom-class"
+    header="Viaje creado"
+    [buttons]="actionSheetButtons"
+  ></ion-action-sheet>
+
 </ion-content>
