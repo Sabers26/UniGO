@@ -102,8 +102,6 @@ export class LoginPage implements OnInit {
           const viajePasajero = this.storeViaje.buscarViajePasajero(this.usuario).then((dato)=>{
             promesa=dato
           })
-          console.log(promesa)
-          console.log(viaje)
           if(viaje!==undefined)
           {
             this.storage.set("viaje", viaje)

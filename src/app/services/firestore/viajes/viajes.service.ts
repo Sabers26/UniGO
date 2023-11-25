@@ -94,7 +94,6 @@ export class ViajesService {
           console.log(pasajero)
           if(usuario.email==pasajero.email)
           {
-            console.log("pase el if")
             viaje.fecha_viaje=datos["fecha_viaje"]
             viaje.hora_salida=datos['hora_salida']
             viaje.destino=datos['destino']
