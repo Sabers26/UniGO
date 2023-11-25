@@ -60,7 +60,7 @@
 
 </ion-content>
 <!-- INFORMACION DEL PASAJERO -->
-<ion-content class="ion-padding" *ngIf="viaje.conductor.email!==usuario.email">
+<ion-content class="ion-padding" *ngIf="viaje.conductor.email!==usuario.email && viaje.fecha_viaje!==''">
   <ion-img src="assets/UNIGO.png" style="width: 50px; float: left;"></ion-img>
   <h4 style="margin-top: 20%;">Informacion de tu viaje:</h4>
   <ion-list [inset]="true">
