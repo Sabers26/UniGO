@@ -73,20 +73,22 @@ export class ViajesService {
     if(viaje.conductor.auto!==undefined)
     {
       viaje.conductor.auto.capacidad+=1
-      await this.fireStore.collection(this.pathViajes).doc(viaje.conductor.auto.patente).set(viaje)
+      return await this.fireStore.collection(this.pathViajes).doc(viaje.conductor.auto.patente).set(viaje)
     }
   }
 
   async anularViaje(viaje:Viaje)
   {
     let cantidad:number=0
+    console.log(viaje)
     if(viaje.conductor.auto!==undefined && viaje.pasajeros!==undefined)
     {
       viaje.pasajeros.forEach(()=>{
         cantidad+=1
       })
       viaje.conductor.auto.capacidad+=cantidad
-      await this.fireStore.collection(this.pathViajes).doc(viaje.conductor.auto.patente).delete()
+      console.log(viaje.conductor.auto.capacidad)
+      return await this.fireStore.collection(this.pathViajes).doc(viaje.conductor.auto.patente).delete()
     }
   }
   async obtenerViaje(usuario:Usuario):Promise<Viaje|undefined>

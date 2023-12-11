@@ -1,4 +1,4 @@
-<app-header titulo="Nuevo auto" inicio="1"></app-header>
+<app-header titulo="Nuevo Viaje" inicio="1"></app-header>
 
 <!-- DATOS QUE SE MOSTRARAN SI NO TIENES VIAJES -->
 <ion-content class="ion-padding" *ngIf="viaje.fecha_viaje==''">
@@ -51,8 +51,7 @@
     </ion-item>
   </ion-list>
 
-  <ion-button block color="primary" type="submit" expand="block" shape="round" id="open-action-sheet" (click)="anular()">Anular viaje</ion-button>
-  <ion-action-sheet mode="ios" trigger="open-action-sheet" header="Confirmacion" [buttons]="anularviaje"></ion-action-sheet>
+  <ion-button block color="primary"  expand="block" shape="round" id="open-action-sheet" (click)="anular()">Anular viaje</ion-button>
 
 </ion-content>
 <!-- INFORMACION DEL PASAJERO -->
@@ -110,7 +109,6 @@
     </ion-item>
   </ion-list>
 
-  <ion-button block color="primary" type="submit" expand="block" shape="round" id="open-action-sheet" (click)="cancelar()">Anular viaje</ion-button>
-  <ion-action-sheet mode="ios" trigger="open-action-sheet" header="Confirmacion" [buttons]="cancelarviaje"></ion-action-sheet>
+  <ion-button block color="primary" expand="block" shape="round" id="open-action-sheet" (click)="cancelar()">Anular viaje</ion-button>
 
 </ion-content>

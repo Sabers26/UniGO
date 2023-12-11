@@ -20,7 +20,7 @@ export class ViajesGuard implements CanActivate {
   {
     let bandera:boolean=false
     await this.storage.getViajeLocal().then((viaje)=>{
-      if(viaje==undefined)
+      if(viaje===null)
       {
         bandera=true
       }

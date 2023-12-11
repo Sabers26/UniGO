@@ -29,9 +29,10 @@ export class HomePage {
         this.bandera=false
         
     }
-    this.storeViaje.getAllViajes().then((viajes)=>{
+    this.storeViaje.getAllViajes().then((viajes:any)=>{
       
       this.viajes=viajes
+      console.log(viajes)
       this.loaded = true;
     })
     })

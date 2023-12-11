@@ -41,14 +41,18 @@ export class ViajesPage implements OnInit {
     ) { }
 
   ngOnInit() {
+    
+  }
+  ionViewDidEnter(){
     this.bandera=true
     this.storage.getSesion().then((sesion)=>{
       this.usuario=sesion
       this.storage.getViajeLocal().then((viaje)=>{
         if(viaje!==null)
         {
+          console.log(viaje)
           this.viaje=viaje
-          if(this.viaje.conductor==this.usuario)
+          if(this.viaje.conductor.email===this.usuario.email)
           {
             this.bandera_viaje=1
           }
@@ -58,7 +62,6 @@ export class ViajesPage implements OnInit {
         }
       })
     })
-    
   }
 
   agregar(){
@@ -83,53 +86,20 @@ export class ViajesPage implements OnInit {
     await toast.present()
   }
 
-  anular(){
-    this.store.anularViaje(this.viaje).then(()=>{
+  async anular(){
+    await this.store.anularViaje(this.viaje).then((result)=>{
       this.storage.anularViaje().then(()=>{
         this.router.navigate(['/tabs/home'])
       })
     })
   }
 
-  cancelar(){
-    this.store.anularViaje(this.viaje).then(()=>{
-      this.storage.anularViaje().then(()=>{
-        this.router.navigate(['/tabs/home'])
-      })
+  async cancelar(){
+    await this.store.eliminarPasajero(this.viaje).then((result)=>{
+      console.log(result)
     })
   }
 
-  anularviaje = [
-    {
-      text: 'Confirmar',
-      data: {
-        action: this.anular(),
-      },
-    },
-    {
-      text: 'Cancel',
-      role: 'cancel',
-      data: {
-        action: 'cancel',
-      },
-    },
-  ];
-
-  cancelarviaje = [
-    {
-      text: 'Confirmar',
-      data: {
-        action: this.cancelar(),
-      },
-    },
-    {
-      text: 'Cancel',
-      role: 'cancel',
-      data: {
-        action: 'cancel',
-      },
-    },
-  ];
 
   
 }

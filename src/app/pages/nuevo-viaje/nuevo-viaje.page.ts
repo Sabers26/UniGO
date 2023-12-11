@@ -74,9 +74,10 @@ export class NuevoViajePage implements OnInit {
     this.storage.getSesion().then((datosUsuario)=>{
       this.viaje.conductor=datosUsuario
       this.storeViaje.addViaje(this.viaje).then(()=>{
+        console.log(this.viaje)
         this.storage.addViajeLocal(this.viaje)
         this.bandera=false
-        this.router.navigate(['/tabs/home'])
+        this.router.navigate(['/tabs/viajes'])
       })
     }) 
     
